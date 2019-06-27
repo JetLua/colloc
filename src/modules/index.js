@@ -1,0 +1,6 @@
+export * as wx from './wx'
+export * as ad from './ad'
+export store from './store'
+export chart from './chart'
+export setting from './setting'
+export * as sound from './sound'

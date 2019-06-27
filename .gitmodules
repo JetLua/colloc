@@ -1,0 +1,8 @@
+[submodule "libs/adapter"]
+	path = libs/adapter
+	url = git@github.com:JetLua/wechat-adapter.git
+	branch = master
+[submodule "src/core/layout"]
+	path = src/core/layout
+	url = git@github.com:JetLua/pixi-layout.git
+	branch = master

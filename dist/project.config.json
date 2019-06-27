@@ -1,0 +1,46 @@
+{
+	"description": "项目配置文件。",
+	"cloudfunctionRoot": "cloud/",
+	"packOptions": {
+		"ignore": [
+			{
+				"type": "suffix",
+				"value": ".mapx"
+			}
+		]
+	},
+	"setting": {
+		"urlCheck": false,
+		"es6": false,
+		"postcss": false,
+		"minified": false,
+		"newFeature": true,
+		"nodeModules": false,
+		"autoAudits": false
+	},
+	"compileType": "game",
+	"libVersion": "2.7.2",
+	"appid": "wx30277eaf6bab6b65",
+	"projectname": "colloc",
+	"isGameTourist": false,
+	"simulatorType": "wechat",
+	"simulatorPluginLibVersion": {},
+	"condition": {
+		"search": {
+			"current": -1,
+			"list": []
+		},
+		"conversation": {
+			"current": -1,
+			"list": []
+		},
+		"game": {
+			"currentL": -1,
+			"list": []
+		},
+		"miniprogram": {
+			"current": -1,
+			"list": []
+		}
+	}
+}
