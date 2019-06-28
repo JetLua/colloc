@@ -2,7 +2,7 @@ import {EventEmitter} from 'events'
 
 class Sound extends EventEmitter {
   get paused() {
-    return this.ctx.paused
+    return this.ctx?.paused
   }
 
   constructor(src, {volume = 1, loop = false, autoplay}) {
@@ -19,18 +19,19 @@ class Sound extends EventEmitter {
   }
 
   play() {
-    this.ctx.play()
+    this.ctx?.play()
   }
 
   stop() {
-    this.ctx.stop()
+    this.ctx?.stop()
   }
 
   pause() {
-    this.ctx.pause()
+    this.ctx?.pause()
   }
 
   destroy() {
+    if (!this.ctx) return
     this.ctx.destroy()
     this.ctx = null
   }
@@ -44,8 +45,4 @@ export function load(src, opt = {autoplay: false}) {
 export function play(src, opt = {autoplay: true}) {
   const sound = new Sound(src, opt)
   return sound
-}
-
-export function stop() {
-
 }

@@ -25,6 +25,12 @@ function verify(id) {
   })
 }
 
+function createActivityId() {
+  return wx.cloud.callFunction({
+    name: 'createActivityId'
+  }).then(({result: {activityId}}) => activityId)
+}
+
 function set(data) {
   if (!store.id) return Promise.reject({msg: 'No id'})
   return user.doc(store.id).set({data})
@@ -47,4 +53,5 @@ export {
   update,
   verify,
   transfer,
+  createActivityId
 }

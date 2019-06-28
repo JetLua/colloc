@@ -9,7 +9,7 @@ module.exports = {
   ],
 
   output: {
-    path: path.resolve('dist/context'),
+    path: path.resolve('dist/root/context'),
     filename: 'index.js'
   },
 

@@ -37,8 +37,8 @@ monitor.on('wx:show', ({query}) => {
   store.interaction = new Promise(a => resolve = a)
   wx.onTouchStart(handle)
   function handle() {
-    resolve(wx.getMenuButtonBoundingClientRect())
     wx.offTouchStart(handle)
+    resolve(wx.getMenuButtonBoundingClientRect())
   }
 }
 

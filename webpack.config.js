@@ -13,7 +13,7 @@ module.exports = {
   ],
 
   output: {
-    path: path.resolve('dist'),
+    path: path.resolve('dist/root'),
     filename: 'game.js'
   },
 

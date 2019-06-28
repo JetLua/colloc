@@ -448,7 +448,7 @@ export default {
     store.setting.voice && sound.play('static/sounds/fail.mp3')
 
     wx.showToast({
-      title: this.first ? '点击灯泡和钻石获取提示' : '再来一次',
+      title: this.first ? '点击灯泡或钻石获取提示' : '再来一次',
       icon: 'none',
       duration: this.first ? 2e3 : 1.5e3
     })

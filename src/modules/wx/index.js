@@ -1,5 +1,6 @@
 import store from '../store'
 import {monitor, device} from '../../core'
+import * as cloud from './cloud'
 
 wx.onShow(info => monitor.emit('wx:show', info))
 
@@ -23,9 +24,7 @@ monitor.on('wx:share', () => {
   })
 })
 
-export * as cloud from './cloud'
-
-export function login() {
+function login() {
   return new Promise((resolve, reject) => {
     wx.getUserInfo({
       success({userInfo, cloudID}) {
@@ -70,4 +69,8 @@ export function login() {
   })
 }
 
+export {
+  cloud,
+  login
+}
 
