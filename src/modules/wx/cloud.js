@@ -1,6 +1,6 @@
 import store from '../store'
 
-wx.cloud.init({env: 'colloc-dev'})
+wx.cloud.init({env: PIXI.settings.CLOUD_ENV})
 
 const
   db = wx.cloud.database(),

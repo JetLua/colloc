@@ -3,6 +3,21 @@
 
 开源出来作为`Pixi.js`游戏开发的入门教程。
 
+### 配置
+> 修改成开发者自己的云开发环境
+
+- 小程序端
+```js
+// src/core/env.js
+// 云开发 环境名
+PIXI.settings.CLOUD_ENV = 'colloc-dev'
+```
+- 云函数
+```js
+// 每个函数是独立的所以需要开发者自行修改
+// dist/cloud/verify/index.js
+cloud.init({env: 'colloc-dev'})
+```
 
 ### 开发
 
@@ -17,8 +32,12 @@ git submodule update
 # 安装依赖
 npm i
 
+# dev 可以替换成 build
 # 运行
 npm run dev
+
+# 开放域
+npm run dev:ctx
 
 # 微信开发者工具选择dist目录
 ```

@@ -20,7 +20,7 @@ exports.main = ({id}) => {
 
 function push(id, data) {
   return user.doc(id).update({
-    data 
+    data
   })
 }
 
