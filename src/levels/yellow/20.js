@@ -21,7 +21,7 @@ export default {
 
     {frame: 'blue.png', x: 600, y: 200, angle: -45},
     {frame: 'ring.png', x: 600, y: 400},
-    {frame: 'yellow.auto.png', x: 600, y: 1200, angle: -45},
+    {frame: 'gear.png', x: 600, y: 1200, angle: -45},
     {frame: 'ring.png', x: 600, y: 1600},
 
     {frame: 'triangle.png', x: 800, y: 200, angle: 90},

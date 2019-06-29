@@ -16,7 +16,7 @@ export default {
 
     {frame: 'square.once.png', x: 800, y: 200},
     {frame: 'green.png', x: 800, y: 400, angle: 45, shadow: 225},
-    {frame: 'yellow.auto.png', x: 800, y: 600, angle: -45},
+    {frame: 'gear.png', x: 800, y: 600, angle: -45},
     {frame: 'square.once.png', x: 800, y: 1000},
     {frame: 'green.png', x: 800, y: 1400, angle: 135, shadow: 225},
     {frame: 'ring.png', x: 800, y: 1600}

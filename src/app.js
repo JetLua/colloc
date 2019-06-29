@@ -7,11 +7,30 @@ preload().then(() => {
   entry.show()
 })
 
-monitor.on('wx:show', ({query}) => {
-  const id = query?.id
-  id && wechat.cloud.verify(id).catch(console.log).then(console.log)
-})
+monitor
+  .on('wx:show', ({query}) => {
+    const id = query?.id
+    id && wechat.cloud.verify(id).catch(console.log).then(console.log)
+  })
+  .on('scene:go', (name, opt) => {
+    name === 'game' ? game.show(opt) :
+    name === 'entry' ? entry.show(opt) : 0
+  })
 
+/* BGM */
+{
+  const bgm = sound.load(
+    'https://static.lufei.so/colloc/bgm.mp3',
+    {volume: .5, loop: true}
+  )
+
+  store.setting.music && bgm.play()
+
+  monitor
+    .on('setting:music', ok => ok ? bgm.play() : bgm.pause())
+    .on('ad:close', () => store.setting.music && bgm.paused && bgm.play())
+    .on('wx:show', () => store.setting.music && bgm.paused && bgm.play())
+}
 
 /* 游戏圈 */
 {
@@ -86,28 +105,3 @@ monitor.on('wx:show', ({query}) => {
     }
   })
 }
-
-
-/* BGM */
-{
-  const bgm = sound.load(
-    'https://static.lufei.so/colloc/bgm.mp3',
-    {volume: .5, loop: true}
-  )
-
-  store.setting.music && bgm.play()
-
-  monitor
-    .on('setting:music', ok => ok ? bgm.play() : bgm.pause())
-    .on('ad:close', () => store.setting.music && bgm.paused && bgm.play())
-    .on('wx:show', () => store.setting.music && bgm.paused && bgm.play())
-}
-
-monitor
-  .on('scene:go', (name, opt) => {
-    name === 'game' && game.show(opt)
-    name === 'entry' && entry.show(opt)
-  })
-
-
-

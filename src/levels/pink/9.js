@@ -14,7 +14,7 @@ export default {
     {frame: 'blue.png', x: 400, y: 400, angle: 45, shadow: 135},
     {frame: 'triangle.png', x: 400, y: 800},
 
-    {frame: 'yellow.auto.png', x: 600, y: 1400, angle: -45},
+    {frame: 'gear.png', x: 600, y: 1400, angle: -45},
     {frame: 'blue.png', x: 600, y: 1800, angle: 45},
 
     {frame: 'blue.png', x: 800, y: 400, angle: 45, shadow: 135},

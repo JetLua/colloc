@@ -12,7 +12,7 @@ export default {
     {frame: 'ring.png', x: 400, y: 1200},
     {frame: 'green.png', x: 400, y: 1400, angle: -45, shadow: 225},
 
-    {frame: 'yellow.auto.png', x: 600, y: 400, angle: -45},
+    {frame: 'gear.png', x: 600, y: 400, angle: -45},
     {frame: 'green.png', x: 600, y: 1800, angle: 135, shadow: 225},
 
     {frame: 'triangle.png', x: 800, y: 200, angle: 90},

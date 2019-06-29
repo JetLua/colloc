@@ -6,7 +6,8 @@ import {delay} from '../utils'
 
 const
   {cloud} = wechat,
-  {min, max, cos, sin, sqrt, abs, round} = Math,
+  {min, max, PI, cos, sin, sqrt, abs, round} = Math,
+  PI2 = PI * 2,
   pool = []
 
 export default {
@@ -121,7 +122,7 @@ export default {
       container = new PIXI.Container(),
       interactive = ['blue.png', 'green.png', 'pink.png'],
       single = [
-        'yellow.auto.png', 'ring.png', 'arrow.down.png',
+        'gear.png', 'ring.png', 'arrow.down.png',
         'arrow.up.png', 'arrow.left.png', 'arrow.right.png'
       ],
       hitArea = new PIXI.Circle(0, 0, 52),
@@ -514,12 +515,12 @@ export default {
     ball.position.copyFrom(baffle.position)
 
 
-    if (baffle.name === 'yellow.auto.png' ||
+    if (baffle.name === 'gear.png' ||
       baffle.name === 'pink.png' ||
       baffle.name === 'blue.png') {
       const
-        p = this.normal(baffle.angle) % 180,
-        q = this.normal(ball.angle)
+        p = this.normalize(baffle.angle) % 180,
+        q = this.normalize(ball.angle)
 
       if (p === 45) {
         q / 90 % 2 ? ball.angle += 90 : ball.angle -= 90
@@ -528,8 +529,8 @@ export default {
       }
     } else if (baffle.name === 'green.png') {
       const
-        p = this.normal(baffle.angle),
-        q = this.normal(ball.angle)
+        p = this.normalize(baffle.angle),
+        q = this.normalize(ball.angle)
 
       let delta = p - q
 
@@ -551,8 +552,8 @@ export default {
       ball.angle += 180
     } else if (baffle.name === 'triangle.png') {
       const
-        p = this.normal(baffle.angle),
-        q = this.normal(ball.angle)
+        p = this.normalize(baffle.angle),
+        q = this.normalize(ball.angle)
 
       let delta = p - q
 
@@ -562,7 +563,7 @@ export default {
     }
 
     switch (baffle.name) {
-      case 'yellow.auto.png': {
+      case 'gear.png': {
         const action = tween({
           from: baffle.angle,
           to: baffle.angle + 90
@@ -623,7 +624,7 @@ export default {
   },
 
   /* 0 - 360 */
-  normal(angle) {
+  normalize(angle) {
     angle = round(angle) % 360
     return angle < 0 ? angle + 360 : angle
   },

@@ -7,8 +7,8 @@ export default {
     {frame: 'pink.png', x: 0, y: 1000, angle: 45, shadow: 135},
 
     {frame: 'square.once.png', x: 200, y: 200},
-    {frame: 'yellow.auto.png', x: 200, y: 600, angle: 45},
-    {frame: 'yellow.auto.png', x: 200, y: 1200, angle: 45},
+    {frame: 'gear.png', x: 200, y: 600, angle: 45},
+    {frame: 'gear.png', x: 200, y: 1200, angle: 45},
 
     {frame: 'green.png', x: 400, y: 1000, angle: 45, shadow: 135},
     {frame: 'blue.png', x: 400, y: 1600, angle: 45, shadow: 135},
