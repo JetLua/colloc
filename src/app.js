@@ -1,20 +1,22 @@
 import {stage, ticker, monitor, screen} from './core'
-import {entry, preload, game} from './scenes'
+import {entry, preload, game, custom} from './scenes'
 import {store, sound, wx as wechat} from './modules'
 import dayjs from 'dayjs'
 
 preload().then(() => {
-  entry.show()
+  const {query: {id, scene}} = wx.getLaunchOptionsSync()
+  if (scene && scene.length === 32) {
+    custom.show(scene)
+  } else entry.show()
+  /* 来自分享 */
+  id && wechat.cloud.verify(query.id).catch(console.log)
 })
 
 monitor
-  .on('wx:show', ({query}) => {
-    const id = query?.id
-    id && wechat.cloud.verify(id).catch(console.log).then(console.log)
-  })
   .on('scene:go', (name, opt) => {
     name === 'game' ? game.show(opt) :
-    name === 'entry' ? entry.show(opt) : 0
+    name === 'entry' ? entry.show(opt) :
+    name === 'custom' ? custom.show(opt) : 0
   })
 
 /* BGM */
@@ -43,6 +45,8 @@ monitor
       height: 40
     }
   })
+
+  button.hide()
 
   monitor
     .on('scene:show', name => name === 'entry' ? button.show() : button.hide())
@@ -88,7 +92,7 @@ monitor
 
     if (stuff) {
       store.diamond = stuff.diamond || 0
-      store.unlocked = Math.max(stuff.unlocked, store.unlocked)
+      store.unlocked = Math.max(stuff.unlocked || 1, store.unlocked)
       cloud.update({
         ...store.user,
         stamp: Date.now(),
@@ -103,5 +107,13 @@ monitor
         date: dayjs().format('YYYY/MM/DD HH:mm:ss')
       })
     }
+  })
+}
+
+/* 检查更新 */
+{
+  const manager = wx.getUpdateManager()
+  manager.onUpdateReady(() => {
+    manager.applyUpdate()
   })
 }

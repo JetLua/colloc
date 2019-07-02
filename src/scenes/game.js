@@ -4,6 +4,10 @@ import {stage, screen, design, device, monitor, zoom, ticker} from '../core'
 import {tween, easing, chain, everyFrame} from 'popmotion'
 import {delay} from '../utils'
 
+/**
+ *  TODO: Replace the render with a renderer
+ */
+
 const
   {cloud} = wechat,
   {min, max, PI, cos, sin, sqrt, abs, round} = Math,
@@ -14,7 +18,7 @@ export default {
   speed: 0,
   index: 0,
   baffles: null,
-  point: null,
+  site: null,
   last: null,
   first: null,
 
@@ -245,7 +249,7 @@ export default {
       })
 
     this.ball = ball
-    this.point = {start, end}
+    this.site = {start, end}
     container.name = 'stage'
     container.interactive = true
     container.scale.set(min(
@@ -259,7 +263,7 @@ export default {
 
   cue() {
     const
-      {point: {start}, baffles} = this,
+      {site: {start}, baffles} = this,
       baffle = baffles[0],
       cues = Array.from({length: 2}, () => {
         const cue = PIXI.Sprite.from('circle.cue.png')
@@ -305,7 +309,7 @@ export default {
     const {
       ball,
       baffles,
-      point: {start}
+      site: {start}
     } = this
 
     this.speed = 14
@@ -388,7 +392,7 @@ export default {
 
   win() {
     const
-      {ball, point: {end}} = this,
+      {ball, site: {end}} = this,
       unlocked = min(this.index + 1 === store.unlocked ? this.index + 2 : store.unlocked, 75)
 
     /* 排行榜 */
@@ -460,7 +464,7 @@ export default {
   },
 
   restore(clean = false) {
-    const {ball, back, retry, baffles, point: {start}} = this
+    const {ball, back, retry, baffles, site: {start}} = this
 
     this.speed = 0
     this.stamp = performance.now()
@@ -489,7 +493,7 @@ export default {
 
   /* 碰撞检测 */
   detect() {
-    const {ball, baffles, speed, point: {end}} = this
+    const {ball, baffles, speed, site: {end}} = this
 
     /* end */
     if (this.distance(ball, end) <= speed) return this.win()
@@ -731,7 +735,7 @@ export default {
     this.bulb =
     this.back =
     this.retry =
-    this.point =
+    this.site =
     this.first =
     this.baffles = null
 

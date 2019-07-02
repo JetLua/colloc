@@ -38,7 +38,6 @@ zoom.mix = [
 ]
 
 renderer.plugins.accessibility.destroy()
-
 renderer.plugins.interaction.mapPositionToPoint = (point, x, y) => {
   point.set(x * pixelRatio, y * pixelRatio)
 }

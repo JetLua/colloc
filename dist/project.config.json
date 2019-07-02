@@ -35,9 +35,19 @@
 			"current": -1,
 			"list": []
 		},
-		"game": {
-			"currentL": -1,
+		"plugin": {
+			"current": -1,
 			"list": []
+		},
+		"game": {
+			"current": 0,
+			"list": [
+				{
+					"id": 0,
+					"name": "test",
+					"query": "scene=e47e55695d1b6c6a050bd7dd5fb89884"
+				}
+			]
 		},
 		"miniprogram": {
 			"current": -1,

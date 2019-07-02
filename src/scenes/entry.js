@@ -28,7 +28,7 @@ export default {
       'blue',
       store.unlocked > 25 ? 'pink' : 'lock',
       store.unlocked > 50 ? 'yellow' : 'lock',
-      // 'chart',
+      'custom',
       'setting'
     ].forEach((id, index) => {
       const item = PIXI.Sprite.from(`circle.${id}.png`)
@@ -184,6 +184,9 @@ export default {
         } else if (target.name === 'setting') {
           this.layout.visible = false
           this.addSetting()
+        } else if (target.name === 'custom') {
+          this.hide()
+          monitor.emit('scene:go', 'custom')
         }
       })
       .on('pointerdown', ev => {

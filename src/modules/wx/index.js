@@ -14,8 +14,8 @@ wx.onShareAppMessage(() => ({
   ][~~(Math.random() * 1)]
 }))
 
-monitor.on('wx:share', () => {
-  wx.shareAppMessage({
+monitor.on('wx:share', opt => {
+  wx.shareAppMessage(opt || {
     title: '从未停止对美好事物的探索...',
     query: `id=${store.id}`,
     imageUrl: [
@@ -73,4 +73,3 @@ export {
   cloud,
   login
 }
-

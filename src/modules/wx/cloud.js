@@ -4,7 +4,8 @@ wx.cloud.init({env: PIXI.settings.CLOUD_ENV})
 
 const
   db = wx.cloud.database(),
-  user = db.collection('user')
+  user = db.collection('user'),
+  level = db.collection('level')
 
 function find(opt) {
   return user
@@ -46,11 +47,27 @@ function get(opt) {
   return user.doc(store.id).field(opt).get()
 }
 
+function upload(conf) {
+  return wx.cloud.callFunction({
+    name: 'upload',
+    data: {
+      conf,
+      author: store.user?.name || '神秘人',
+    }
+  })
+}
+
+function load(id) {
+  return level.doc(id).get()
+}
+
 export {
   get,
   set,
   find,
+  load,
   update,
+  upload,
   verify,
   transfer,
   createActivityId

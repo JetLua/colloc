@@ -12,6 +12,14 @@ export default {
     return localStorage.setItem('unlocked', v)
   },
 
+  get design() {
+    return localStorage.getItem('design')
+  },
+
+  set design(v) {
+    return localStorage.setItem('design', v)
+  },
+
   setting: {
     get voice() {
       const v = localStorage.getItem('setting:voice')
