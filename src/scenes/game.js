@@ -476,6 +476,9 @@ export default {
       baffle.interactive = baffle.clickable
       baffle instanceof PIXI.AnimatedSprite && baffle.gotoAndStop(0)
 
+      /* for arrow.*.png */
+      baffle.action?.stop()
+
       if (!clean && baffle.clickable) return
 
       const {x, y, angle} = baffle.prop
@@ -590,6 +593,9 @@ export default {
           duration: 3e2,
           ease: easing.linear
         }).start(v => baffle._destroyed ? action.stop() : baffle.position.copyFrom(v))
+
+        baffle.action = action
+
         store.setting.voice && sound.play('static/sounds/collide.arrow.mp3')
         break
       }
