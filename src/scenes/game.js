@@ -120,7 +120,7 @@ export default {
       n = this.index % 25,
       data = levels[m][n],
       container = new PIXI.Container(),
-      interactive = ['blue.png', 'green.png', 'pink.png'],
+      clickable = ['blue.png', 'green.png', 'pink.png'],
       single = [
         'gear.png', 'ring.png', 'arrow.down.png',
         'arrow.up.png', 'arrow.left.png', 'arrow.right.png'
@@ -136,7 +136,7 @@ export default {
     this.baffles = data.baffles.map(item => {
       let baffle
 
-      if (single.indexOf(item.frame) > -1) {
+      if (single.indexOf(item.frame) !== -1) {
         baffle = PIXI.Sprite.from(item.frame)
       } else {
         baffle = PIXI.AnimatedSprite
@@ -175,7 +175,7 @@ export default {
       baffle.type = 'baffle'
       baffle.collidable = true
       baffle.interactive =
-      baffle.clickable = interactive.indexOf(item.frame) > -1
+      baffle.clickable = clickable.indexOf(item.frame) !== -1
       baffle.angle = item.angle || 0
 
       baffle.interactive ? baffle.hitArea = hitArea : 0

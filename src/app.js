@@ -88,7 +88,7 @@ monitor
 
     if (stuff) {
       store.diamond = stuff.diamond || 0
-      store.unlocked = stuff.unlocked || 1
+      store.unlocked = Math.max(stuff.unlocked, store.unlocked)
       cloud.update({
         ...store.user,
         stamp: Date.now(),
