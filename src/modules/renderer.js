@@ -17,6 +17,7 @@ const
     .beginFill(0xe0eef5, .1)
     .drawRect(0, 0, 1e3, 2e3)
     .endFill(),
+  // stage = new PIXI.Container(),
   left = ['blue.png', 'green.png', 'pink.png', 'gear.png', 'triangle.png'],
   right = [
     'ring.png', 'square.png', 'square.once.png',
@@ -619,7 +620,11 @@ function setMode(state) {
   bar.right.visible = state === 'design'
 
   if (state === 'normal') {
-    stage.clear()
+    stage
+      .clear()
+      .beginFill(0xe0eef5, 0)
+      .drawRect(0, 0, 1e3, 2e3)
+      .endFill()
   } else {
     stage
       .clear()

@@ -3,20 +3,44 @@ import {entry, preload, game, custom} from './scenes'
 import {store, sound, wx as wechat} from './modules'
 import dayjs from 'dayjs'
 
-preload().then(() => {
-  const {query: {id, scene}} = wx.getLaunchOptionsSync()
-  if (scene && scene.length === 32) {
-    custom.show(scene)
-  } else entry.show()
+let pointer
+
+const load = preload().then(() => {
+  const {query: {id}} = wx.getLaunchOptionsSync()
   /* 来自分享 */
   id && wechat.cloud.verify(query.id).catch(console.log)
 })
 
 monitor
+  .on('wx:show', async ({query: {scene}}) => {
+    await load
+    if (scene && scene.length === 32) {
+      /* TODO */
+      pointer && pointer.hide()
+      monitor.emit('scene:go', 'custom', scene)
+    } else monitor.emit('scene:go', 'entry')
+  })
   .on('scene:go', (name, opt) => {
-    name === 'game' ? game.show(opt) :
-    name === 'entry' ? entry.show(opt) :
-    name === 'custom' ? custom.show(opt) : 0
+    /* TODO */
+    switch (name) {
+      case 'game': {
+        pointer = game
+        game.show(opt)
+        break
+      }
+
+      case 'entry': {
+        pointer = entry
+        entry.show(opt)
+        break
+      }
+
+      case 'custom': {
+        pointer = custom
+        custom.show(opt)
+        break
+      }
+    }
   })
 
 /* BGM */
