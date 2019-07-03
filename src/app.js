@@ -15,10 +15,11 @@ monitor
   .on('wx:show', async ({query: {scene}}) => {
     await load
     if (scene && scene.length === 32) {
-      /* TODO */
       pointer && pointer.hide()
       monitor.emit('scene:go', 'custom', scene)
-    } else monitor.emit('scene:go', 'entry')
+    } else if (!pointer) {
+      monitor.emit('scene:go', 'entry')
+    }
   })
   .on('scene:go', (name, opt) => {
     /* TODO */
