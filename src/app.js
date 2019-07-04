@@ -8,12 +8,12 @@ let pointer
 const load = preload().then(() => {
   const {query: {id}} = wx.getLaunchOptionsSync()
   /* 来自分享 */
-  id && wechat.cloud.verify(query.id).catch(console.log)
+  id && wechat.cloud.verify(id).catch(console.log)
 })
 
 monitor
   .on('wx:show', async ({query: {scene}}) => {
-    await load
+    await load.catch(console.log)
     if (scene && scene.length === 32) {
       pointer && pointer.hide()
       monitor.emit('scene:go', 'custom', scene)

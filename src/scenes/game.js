@@ -37,12 +37,13 @@ export default {
     this.diamond = PIXI.Sprite.from('icon.diamond.png')
     this.diamond.interactive = true
     this.diamond.zIndex = 3
-    this.diamond.visible = true
+    this.diamond.visible = false
     this.diamond.anchor.set(.5)
 
     /* 💎数量 */
     wechat.cloud.get({diamond: true}).then(({data: {diamond}}) => {
       store.diamond = diamond || 0
+      this.diamond.visible = true
       const text = new PIXI.Text(store.diamond, {
         fill: 0xffffff,
         fontSize: 30,
