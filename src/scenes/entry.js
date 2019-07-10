@@ -28,7 +28,7 @@ export default {
       'blue',
       store.unlocked > 25 ? 'pink' : 'lock',
       store.unlocked > 50 ? 'yellow' : 'lock',
-      'custom',
+      // 'custom',
       'setting'
     ].forEach((id, index) => {
       const item = PIXI.Sprite.from(`circle.${id}.png`)

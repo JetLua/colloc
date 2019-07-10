@@ -14,12 +14,7 @@ const load = preload().then(() => {
 monitor
   .on('wx:show', async ({query: {scene}}) => {
     await load.catch(console.log)
-    if (scene && scene.length === 32) {
-      pointer && pointer.hide()
-      monitor.emit('scene:go', 'custom', scene)
-    } else if (!pointer) {
-      monitor.emit('scene:go', 'entry')
-    }
+    !pointer && monitor.emit('scene:go', 'entry')
   })
   .on('scene:go', (name, opt) => {
     /* TODO */
