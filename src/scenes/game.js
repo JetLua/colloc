@@ -346,7 +346,7 @@ export default {
     return i < 10 ? `0${i}` : i
   },
 
-  update() {
+  update(delta) {
     const
       {ball, speed} = this
 
@@ -354,8 +354,8 @@ export default {
 
     if (!speed) return
 
-    ball.x += cos(ball.rotation) * speed
-    ball.y += sin(ball.rotation) * speed
+    ball.x += cos(ball.rotation) * speed * delta
+    ball.y += sin(ball.rotation) * speed * delta
 
     this.trail()
     this.detect()

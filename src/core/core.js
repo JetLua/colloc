@@ -1,6 +1,5 @@
 import './env'
 import './layout'
-import Ticker from './ticker'
 
 const {
   devicePixelRatio,
@@ -9,7 +8,7 @@ const {
 } = wx.getSystemInfoSync()
 
 const
-  ticker = new Ticker(),
+  ticker = PIXI.Ticker.shared,
   loader = PIXI.Loader.shared,
   stage = new PIXI.Container(),
   design = {width: 750, height: 1334},
