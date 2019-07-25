@@ -73,7 +73,7 @@ export default {
         col:  5
       }),
       style = {
-        fontFamily: ['Raleway-SemiBold', 'PingFangSC-Regular', 'Roboto-Regular', 'sans-serif'],
+        fontFamily: store.font,
         fill: [0x529bd1, 0xe0486d, 0xe8a77a][i],
         fontSize: 42
       },

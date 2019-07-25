@@ -70470,7 +70470,7 @@ var max = Math.max,
       col: 5
     }),
         style = {
-      fontFamily: ['Raleway-SemiBold', 'PingFangSC-Regular', 'Roboto-Regular', 'sans-serif'],
+      fontFamily: _modules__WEBPACK_IMPORTED_MODULE_5__["store"].font,
       fill: [0x529bd1, 0xe0486d, 0xe8a77a][i],
       fontSize: 42
     },
@@ -71022,8 +71022,8 @@ var cloud = _modules__WEBPACK_IMPORTED_MODULE_20__["wx"].cloud,
         ball = this.ball,
         now = performance.now(),
         delta = now - this.lastFrame;
-    if (delta < 17) return;
-    this.lastFrame = now - delta % 17 | 0;
+    if (delta < 18) return;
+    this.lastFrame = now - delta % 18 | 0;
     ball.x += cos(ball.rotation) * speed;
     ball.y += sin(ball.rotation) * speed;
   },
@@ -71526,11 +71526,13 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _babel_runtime_corejs3_core_js_stable_promise__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @babel/runtime-corejs3/core-js-stable/promise */ "./node_modules/@babel/runtime-corejs3/core-js-stable/promise.js");
 /* harmony import */ var _babel_runtime_corejs3_core_js_stable_promise__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_babel_runtime_corejs3_core_js_stable_promise__WEBPACK_IMPORTED_MODULE_0__);
 /* harmony import */ var _core__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../core */ "./src/core/index.js");
+/* harmony import */ var _modules__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../modules */ "./src/modules/index.js");
+
 
 
 /* 加载字体 */
 
-wx.loadFont('static/fonts/Raleway-SemiBold.ttf');
+_modules__WEBPACK_IMPORTED_MODULE_2__["store"].font = wx.loadFont('static/fonts/Raleway-SemiBold.ttf') || 'sans-serif';
 /* harmony default export */ __webpack_exports__["default"] = (function () {
   return new _babel_runtime_corejs3_core_js_stable_promise__WEBPACK_IMPORTED_MODULE_0___default.a(function (resolve) {
     _core__WEBPACK_IMPORTED_MODULE_1__["loader"].baseUrl = 'static';

@@ -1,7 +1,8 @@
 import {loader} from '../core'
+import {store} from '../modules'
 
 /* 加载字体 */
-wx.loadFont('static/fonts/Raleway-SemiBold.ttf')
+store.font = wx.loadFont('static/fonts/Raleway-SemiBold.ttf') || 'sans-serif'
 
 export default function () {
   return new Promise(resolve => {
@@ -12,7 +13,3 @@ export default function () {
       .load(resolve)
   })
 }
-
-
-
-

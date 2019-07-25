@@ -357,9 +357,9 @@ export default {
       now = performance.now(),
       delta = now - this.lastFrame
 
-    if (delta < 17) return
+    if (delta < 18) return
 
-    this.lastFrame = now - delta % 17 | 0
+    this.lastFrame = now - delta % 18 | 0
 
     ball.x += cos(ball.rotation) * speed
     ball.y += sin(ball.rotation) * speed
