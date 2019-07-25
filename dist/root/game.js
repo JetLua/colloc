@@ -70726,6 +70726,7 @@ var cloud = _modules__WEBPACK_IMPORTED_MODULE_20__["wx"].cloud,
   site: null,
   last: null,
   first: null,
+  lastFrame: -1,
   init: function init() {
     var _this = this;
 
@@ -70980,7 +70981,7 @@ var cloud = _modules__WEBPACK_IMPORTED_MODULE_20__["wx"].cloud,
     var ball = this.ball,
         baffles = this.baffles,
         start = this.site.start;
-    this.speed = 14;
+    this.speed = 16;
     this.last = null;
     ball.visible = true;
     ball.angle = 270;
@@ -71011,15 +71012,78 @@ var cloud = _modules__WEBPACK_IMPORTED_MODULE_20__["wx"].cloud,
   fill: function fill(i) {
     return i < 10 ? "0".concat(i) : i;
   },
-  update: function update(delta) {
-    var ball = this.ball,
-        speed = this.speed;
+
+  /**
+   * 物理计算
+   * 固定 60 fps
+   */
+  tick: function tick() {
+    var speed = this.speed,
+        ball = this.ball,
+        now = performance.now(),
+        delta = now - this.lastFrame;
+    if (delta < 17) return;
+    this.lastFrame = now - delta % 17 | 0;
+    ball.x += cos(ball.rotation) * speed;
+    ball.y += sin(ball.rotation) * speed;
+  },
+  update: function update() {
     this.time();
-    if (!speed) return;
-    ball.x += cos(ball.rotation) * speed * delta;
-    ball.y += sin(ball.rotation) * speed * delta;
+    if (!this.speed) return;
+    this.tick();
     this.trail();
     this.detect();
+  },
+
+  /* 碰撞检测 */
+  detect: function detect() {
+    var ball = this.ball,
+        baffles = this.baffles,
+        speed = this.speed,
+        end = this.site.end;
+    /* end */
+
+    if (this.distance(ball, end) <= speed) return this.win();
+    /* 出界 */
+
+    {
+      var _ball$getGlobalPositi = ball.getGlobalPosition(),
+          x = _ball$getGlobalPositi.x,
+          y = _ball$getGlobalPositi.y;
+
+      if (!_core__WEBPACK_IMPORTED_MODULE_21__["screen"].contains(x, y)) return this.fail();
+    }
+    var _iteratorNormalCompletion = true;
+    var _didIteratorError = false;
+    var _iteratorError = undefined;
+
+    try {
+      for (var _iterator = _babel_runtime_corejs3_core_js_get_iterator__WEBPACK_IMPORTED_MODULE_11___default()(baffles), _step; !(_iteratorNormalCompletion = (_step = _iterator.next()).done); _iteratorNormalCompletion = true) {
+        var baffle = _step.value;
+        if (!baffle.collidable) continue;
+        var d = this.distance(ball, baffle);
+
+        if (d <= speed && !baffle.hold) {
+          baffle.hold = true;
+          this.respond(ball, baffle);
+        } else if (d > speed && baffle.hold) {
+          baffle.hold = false;
+        }
+      }
+    } catch (err) {
+      _didIteratorError = true;
+      _iteratorError = err;
+    } finally {
+      try {
+        if (!_iteratorNormalCompletion && _iterator.return != null) {
+          _iterator.return();
+        }
+      } finally {
+        if (_didIteratorError) {
+          throw _iteratorError;
+        }
+      }
+    }
   },
 
   /* 拖尾 */
@@ -71027,7 +71091,7 @@ var cloud = _modules__WEBPACK_IMPORTED_MODULE_20__["wx"].cloud,
     var ball = this.ball,
         last = this.last;
     if (!last) return this.last = ball.position.clone();
-    if (this.distance(last, ball) < 30) return;
+    if (this.distance(last, ball) < 34) return;
     var dot = pool.pop() || PIXI.Sprite.from('trail.png');
     dot.alpha = 1;
     dot.anchor.set(.5);
@@ -71151,57 +71215,6 @@ var cloud = _modules__WEBPACK_IMPORTED_MODULE_20__["wx"].cloud,
       baffle.angle = angle || 0;
       baffle.position.set(x, y);
     });
-  },
-
-  /* 碰撞检测 */
-  detect: function detect() {
-    var ball = this.ball,
-        baffles = this.baffles,
-        speed = this.speed,
-        end = this.site.end;
-    /* end */
-
-    if (this.distance(ball, end) <= speed) return this.win();
-    /* 出界 */
-
-    {
-      var _ball$getGlobalPositi = ball.getGlobalPosition(),
-          x = _ball$getGlobalPositi.x,
-          y = _ball$getGlobalPositi.y;
-
-      if (!_core__WEBPACK_IMPORTED_MODULE_21__["screen"].contains(x, y)) return this.fail();
-    }
-    var _iteratorNormalCompletion = true;
-    var _didIteratorError = false;
-    var _iteratorError = undefined;
-
-    try {
-      for (var _iterator = _babel_runtime_corejs3_core_js_get_iterator__WEBPACK_IMPORTED_MODULE_11___default()(baffles), _step; !(_iteratorNormalCompletion = (_step = _iterator.next()).done); _iteratorNormalCompletion = true) {
-        var baffle = _step.value;
-        if (!baffle.collidable) continue;
-        var d = this.distance(ball, baffle);
-
-        if (d <= speed && !baffle.hold) {
-          baffle.hold = true;
-          this.respond(ball, baffle);
-        } else if (d > speed && baffle.hold) {
-          baffle.hold = false;
-        }
-      }
-    } catch (err) {
-      _didIteratorError = true;
-      _iteratorError = err;
-    } finally {
-      try {
-        if (!_iteratorNormalCompletion && _iterator.return != null) {
-          _iterator.return();
-        }
-      } finally {
-        if (_didIteratorError) {
-          throw _iteratorError;
-        }
-      }
-    }
   },
 
   /* 响应 */

@@ -21,6 +21,7 @@ export default {
   site: null,
   last: null,
   first: null,
+  lastFrame: -1,
 
   init() {
     this.first = true
@@ -313,7 +314,7 @@ export default {
       site: {start}
     } = this
 
-    this.speed = 14
+    this.speed = 16
     this.last = null
 
     ball.visible = true
@@ -346,19 +347,57 @@ export default {
     return i < 10 ? `0${i}` : i
   },
 
-  update(delta) {
+  /**
+   * 物理计算
+   * 固定 60 fps
+   */
+  tick() {
     const
-      {ball, speed} = this
+      {speed, ball} = this,
+      now = performance.now(),
+      delta = now - this.lastFrame
 
+    if (delta < 17) return
+
+    this.lastFrame = now - delta % 17 | 0
+
+    ball.x += cos(ball.rotation) * speed
+    ball.y += sin(ball.rotation) * speed
+  },
+
+  update() {
     this.time()
 
-    if (!speed) return
+    if (!this.speed) return
 
-    ball.x += cos(ball.rotation) * speed * delta
-    ball.y += sin(ball.rotation) * speed * delta
-
+    this.tick()
     this.trail()
     this.detect()
+  },
+
+  /* 碰撞检测 */
+  detect() {
+    const {ball, baffles, speed, site: {end}} = this
+
+    /* end */
+    if (this.distance(ball, end) <= speed) return this.win()
+
+    /* 出界 */
+    {
+      const {x, y} = ball.getGlobalPosition()
+      if (!screen.contains(x, y)) return this.fail()
+    }
+
+    for (const baffle of baffles) {
+      if (!baffle.collidable) continue
+      const d = this.distance(ball, baffle)
+      if (d <= speed && !baffle.hold) {
+        baffle.hold = true
+        this.respond(ball, baffle)
+      } else if (d > speed && baffle.hold) {
+        baffle.hold = false
+      }
+    }
   },
 
   /* 拖尾 */
@@ -366,7 +405,7 @@ export default {
     const {ball, last} = this
 
     if (!last) return this.last = ball.position.clone()
-    if (this.distance(last, ball) < 30) return
+    if (this.distance(last, ball) < 34) return
 
     const dot = pool.pop() || PIXI.Sprite.from('trail.png')
 
@@ -490,31 +529,6 @@ export default {
       baffle.angle = angle || 0
       baffle.position.set(x, y)
     })
-  },
-
-  /* 碰撞检测 */
-  detect() {
-    const {ball, baffles, speed, site: {end}} = this
-
-    /* end */
-    if (this.distance(ball, end) <= speed) return this.win()
-
-    /* 出界 */
-    {
-      const {x, y} = ball.getGlobalPosition()
-      if (!screen.contains(x, y)) return this.fail()
-    }
-
-    for (const baffle of baffles) {
-      if (!baffle.collidable) continue
-      const d = this.distance(ball, baffle)
-      if (d <= speed && !baffle.hold) {
-        baffle.hold = true
-        this.respond(ball, baffle)
-      } else if (d > speed && baffle.hold) {
-        baffle.hold = false
-      }
-    }
   },
 
   /* 响应 */
