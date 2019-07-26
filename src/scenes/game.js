@@ -314,7 +314,7 @@ export default {
       site: {start}
     } = this
 
-    this.speed = 16
+    this.speed = 18
     this.last = null
 
     ball.visible = true
@@ -394,7 +394,7 @@ export default {
       if (d <= speed && !baffle.hold) {
         baffle.hold = true
         this.respond(ball, baffle)
-      } else if (d > speed && baffle.hold) {
+      } else if (d > 52 && baffle.hold) {
         baffle.hold = false
       }
     }
