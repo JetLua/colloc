@@ -355,11 +355,11 @@ export default {
     const
       {speed, ball} = this,
       now = performance.now(),
-      delta = now - this.lastFrame
+      delta = now - this.lastFrame | 0
 
-    if (delta < 18) return
+    if (delta < 20) return
 
-    this.lastFrame = now - delta % 18 | 0
+    this.lastFrame = now - delta % 20
 
     ball.x += cos(ball.rotation) * speed
     ball.y += sin(ball.rotation) * speed
