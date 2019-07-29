@@ -70726,7 +70726,7 @@ var cloud = _modules__WEBPACK_IMPORTED_MODULE_20__["wx"].cloud,
   site: null,
   last: null,
   first: null,
-  lastFrame: -1,
+  interval: 0,
   init: function init() {
     var _this = this;
 
@@ -71018,12 +71018,11 @@ var cloud = _modules__WEBPACK_IMPORTED_MODULE_20__["wx"].cloud,
    * 固定 60 fps
    */
   tick: function tick() {
-    var speed = this.speed,
-        ball = this.ball,
-        now = performance.now(),
-        delta = now - this.lastFrame | 0;
-    if (delta < 20) return;
-    this.lastFrame = now - delta % 20;
+    this.interval += _core__WEBPACK_IMPORTED_MODULE_21__["ticker"].elapsedMS;
+    if (this.interval < 16) return;
+    this.interval %= 16;
+    var ball = this.ball,
+        speed = this.speed;
     ball.x += cos(ball.rotation) * speed;
     ball.y += sin(ball.rotation) * speed;
   },

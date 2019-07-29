@@ -21,7 +21,7 @@ export default {
   site: null,
   last: null,
   first: null,
-  lastFrame: -1,
+  interval: 0,
 
   init() {
     this.first = true
@@ -352,14 +352,13 @@ export default {
    * 固定 60 fps
    */
   tick() {
-    const
-      {speed, ball} = this,
-      now = performance.now(),
-      delta = now - this.lastFrame | 0
+    this.interval += ticker.elapsedMS
 
-    if (delta < 20) return
+    if (this.interval < 16) return
 
-    this.lastFrame = now - delta % 20
+    this.interval %= 16
+
+    const {ball, speed} = this
 
     ball.x += cos(ball.rotation) * speed
     ball.y += sin(ball.rotation) * speed
