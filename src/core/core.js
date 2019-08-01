@@ -1,6 +1,3 @@
-import './env'
-import './layout'
-
 const {
   devicePixelRatio,
   windowWidth: width,
