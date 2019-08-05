@@ -8,7 +8,7 @@ const isProd = process.env.NODE_ENV === 'production'
 
 module.exports = {
   entry: [
-    './libs/adapter',
+    '@iro/wechat-adapter',
     './src/app.js'
   ],
 
@@ -43,7 +43,8 @@ module.exports = {
 
   plugins: [
     new webpack.ProvidePlugin({
-      PIXI: 'pixi.js'
+      dayjs: 'dayjs',
+      PIXI: 'pixi.js',
     })
   ],
 

@@ -17,10 +17,18 @@
 		"minified": false,
 		"newFeature": true,
 		"nodeModules": false,
-		"autoAudits": false
+		"autoAudits": false,
+		"checkInvalidKey": true,
+		"checkSiteMap": true,
+		"uploadWithSourceMap": true,
+		"babelSetting": {
+			"ignore": [],
+			"disablePlugins": [],
+			"outputPath": ""
+		}
 	},
 	"compileType": "game",
-	"libVersion": "2.7.2",
+	"libVersion": "2.7.7",
 	"appid": "wx30277eaf6bab6b65",
 	"projectname": "colloc",
 	"isGameTourist": false,

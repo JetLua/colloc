@@ -1,7 +1,6 @@
 import {stage, ticker, monitor, screen} from './core'
 import {entry, preload, game, custom} from './scenes'
 import {store, sound, wx as wechat} from './modules'
-import dayjs from 'dayjs'
 
 let pointer
 
