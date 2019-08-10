@@ -1,6 +1,6 @@
 import levels from '../levels'
 import {store, sound, ad, wx as wechat} from '../modules'
-import {stage, screen, design, device, monitor, zoom, ticker} from '../core'
+import {stage, screen, design, device, pixelRatio, monitor, zoom, ticker} from '../core'
 import {tween, easing, chain, everyFrame} from 'popmotion'
 import {delay} from '../utils'
 
@@ -75,12 +75,12 @@ export default {
 
       back.y =
       retry.y =
-      diamond.y = (rect.top + rect.bottom) * .5 * device.pixelRatio
+      diamond.y = (rect.top + rect.bottom) * .5 * pixelRatio
       bulb.y = back.y + 150 * zoom.min
 
       bulb.x =
       back.x =
-      retry.x = (device.width - rect.right) * device.pixelRatio
+      retry.x = (device.width - rect.right) * pixelRatio
 
       diamond.x = screen.width >> 1
     })

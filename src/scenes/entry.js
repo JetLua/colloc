@@ -1,4 +1,4 @@
-import {stage, screen, device, monitor, zoom} from '../core'
+import {stage, screen, device, pixelRatio, monitor, zoom} from '../core'
 import {tween, easing} from 'popmotion'
 import {sound, store, setting} from '../modules'
 
@@ -20,8 +20,8 @@ export default {
     this.back.anchor.set(0, .5)
 
     store.interaction.then(rect => {
-      this.back.y = (rect.top + rect.bottom) * .5 * device.pixelRatio
-      this.back.x = (device.width - rect.right) * device.pixelRatio
+      this.back.y = (rect.top + rect.bottom) * .5 * pixelRatio
+      this.back.x = (device.width - rect.right) * pixelRatio
     })
 
     ![
