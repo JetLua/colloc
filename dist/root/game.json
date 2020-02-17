@@ -1,0 +1,9 @@
+{
+  "deviceOrientation": "portrait",
+  "showStatusBar": false,
+	"openDataContext": "context",
+  "cloud": true,
+  "navigateToMiniProgramAppIdList": [
+    "wx30277eaf6bab6b65"
+  ]
+}
