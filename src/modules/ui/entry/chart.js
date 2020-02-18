@@ -69,6 +69,7 @@ export default {
     }
 
     if (type === 'list') {
+      const {list} = this
       const data = await db.collection('user')
         .orderBy('user.level', 'desc')
         .orderBy('timestamp', 'desc')
@@ -80,10 +81,28 @@ export default {
         .catch(() => null)
 
       if (!data) return wx.showToast({title: '数据拉取失败', icon: 'none'})
-      if (!data.length) return
+      if (!data.length) {
+        let prev = list.getChildByName('prev')
+        let next = list.getChildByName('next')
+        this.cursor--
+        next?.destroy({children: true})
+        next = null
+        if (this.cursor) {
+          prev = prev || PIXI.Sprite.from('btn.up.png')
+          prev.interactive = true
+          prev.y = 840
+          prev.name = 'prev'
+          prev.scale.set(.5)
+          !prev.parent && list.addChild(prev)
+        } else {
+          prev?.destroy({children: true})
+          prev = null
+        }
+        prev && (prev.x = next ? 260 : 300)
+        return
+      }
 
 
-      const {list} = this
 
       list.removeChildren().forEach(child => child.destroy({children: true}))
 
@@ -134,11 +153,9 @@ export default {
         list.addChild(avatar, name, level)
       }
     } else {
-      const data = await call({name: 'alexa'})
-        .catch(() => null)
+      const data = await call({name: 'alexa'}).catch(() => null)
 
       if (!data) return wx.showToast({title: '个人排名拉取失败', icon: 'none'})
-
 
       const {own} = this
       // clean
@@ -197,13 +214,15 @@ export default {
       switch (ev.target?.name) {
         case 'prev': {
           this.cursor--
-          this.render('list')
+          shadow.interactive = false
+          this.render('list').then(() => shadow.interactive = true)
           break
         }
 
         case 'next': {
           this.cursor++
-          this.render('list')
+          shadow.interactive = false
+          this.render('list').then(() => shadow.interactive = true)
           break
         }
 
