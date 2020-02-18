@@ -9,7 +9,12 @@ exports.main = async event => {
   const {OPENID: id} = cloud.getWXContext()
   const cmd = db.command.aggregate
   return user.aggregate()
-    .sort({level: -1})
+    .replaceRoot({newRoot: {
+      _id: '$_id',
+      level: '$user.level',
+      timestamp: '$timestamp'
+    }})
+    .sort({level: -1, timestamp: -1})
     .group({
       _id: null,
       all: cmd.push('$_id')
