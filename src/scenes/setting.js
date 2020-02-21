@@ -2,7 +2,7 @@ import {stage, zoom, design, screen, loader, monitor} from '../core'
 import {store, sound} from '../modules'
 import {backBtn} from '../modules/ui'
 
-const {min} = Math
+const {min, random} = Math
 
 export default {
   init() {
@@ -74,7 +74,16 @@ export default {
         }
 
         case 3: {
-          // todo
+          wx.shareAppMessage({
+            title: '这游戏谁比我玩得 6 ',
+            imageUrl: 'https://static.lufei.so/colloc/images/' + [
+              'share.1.png',
+              'share.2.png',
+              'share.3.png',
+              'share.4.png',
+              'share.5.png',
+            ][random() * 5 | 0]
+          })
           break
         }
       }

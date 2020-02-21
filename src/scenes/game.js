@@ -6,6 +6,7 @@ import {ad, call} from '../modules/wx'
 import levels from '../levels'
 import {tween, everyFrame, easing, chain} from 'popmotion'
 
+const {factory} = dragonBones.PixiFactory
 const {min, PI, cos, sin, sqrt, abs, round, max, random} = Math
 const PI2 = PI * 2
 const hitArea = new PIXI.Circle(0, 0, 52)
@@ -110,6 +111,21 @@ export default {
     ))
 
     container.addChild(layout)
+
+    // 新手提示
+    if (!store.user.level) {
+      const anime = factory.buildArmatureDisplay('Armature')
+      anime.animation.play('tap')
+      anime.scale.set(1 / layout.scale.x)
+      anime.position.copyFrom(this.baffles[0])
+      layout.addChild(anime)
+      this.baffles[0].once('tap', () => {
+        anime.position.copyFrom(start)
+      })
+      start.once('tap', () => {
+        anime.destroy({children: true})
+      })
+    }
   },
 
   tick() {
