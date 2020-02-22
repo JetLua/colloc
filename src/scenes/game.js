@@ -151,6 +151,9 @@ export default {
 
     sound.play({name: 'win.mp3'})
 
+    ad.show('adunit-e0ecc6cf322cb27a', 'splash').catch(console.log)
+
+
     this.level++
 
     if (store.user.level < this.level) {
@@ -446,6 +449,11 @@ export default {
       this.speed = 0
       this.layout.destroy({children: true})
       this.render()
+    }).on('chart', () => {
+      wx.showToast({
+        title: '暂未开放',
+        icon: 'none'
+      })
     })
   },
 

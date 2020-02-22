@@ -175,36 +175,29 @@ export default {
           }
 
           case 1: {
-            tween({
-              from: target.rotation,
-              to: target.rotation + PI2
-            }).start({
-              update: v => target.rotation = v,
-              complete: () => shadow.emit('hint')
-            })
-            break
-          }
-
-          case 2: {
-            tween({
-              from: target.rotation,
-              to: target.rotation + PI2
-            }).start({
-              update: v => target.rotation = v,
-              complete: () => shadow.emit('replay')
-            })
-            break
-          }
-
-          case 3: {
+            shadow.emit('hint')
             tween({
               from: target.rotation,
               to: target.rotation + PI2
             }).start(v => target.rotation = v)
-            wx.showToast({
-              title: '暂未开放',
-              icon: 'none'
-            })
+            break
+          }
+
+          case 2: {
+            shadow.emit('replay')
+            tween({
+              from: target.rotation,
+              to: target.rotation + PI2
+            }).start(v => target.rotation = v)
+            break
+          }
+
+          case 3: {
+            shadow.emit('chart')
+            tween({
+              from: target.rotation,
+              to: target.rotation + PI2
+            }).start(v => target.rotation = v)
             break
           }
         }

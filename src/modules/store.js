@@ -60,9 +60,7 @@ const handle = {
   set(target, key, value) {
     if (target[key] === value) return true
 
-    target !== store &&
-    key !== 'timestamp' &&
-    (store.timestamp = Date.now())
+    if (target !== store || key !== 'timestamp') store.timestamp = Date.now()
 
     if (value && typeof value === 'object' && !queue.has(value)) {
       value = new Proxy(value, handle)

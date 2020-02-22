@@ -20,22 +20,12 @@ Promise.all([
   preload(),
   GameGlobal.show,
 ]).then(() => {
-  ad.show('adunit-e0ecc6cf322cb27a', 'splash').catch(console.log)
   monitor.emit('scene:go', 'entry')
 }).then(() => {
   login().catch(() => null).then(async info => {
     const {user, setting} = store
 
-    if (info) {
-      user.city = info.city
-      user.name = info.nickName
-      user.gender = info.gender
-      user.country = info.country
-      user.avatar = info.avatarUrl
-      user.province = info.province
-    }
-
-    info = await call({
+    const data = await call({
       name: 'sync',
       data: {
         user,
@@ -44,10 +34,20 @@ Promise.all([
       }
     }).catch(() => null)
 
+    if (data) {
+      store.id = data.id
+      store.user = data.data.user || store.user
+      store.setting = data.data.setting || store.setting
+    }
+
     if (!info) return
-    store.id = info.id
-    store.user = info.data.user
-    store.setting = info.data.setting
+
+    store.user.city = info.city
+    store.user.name = info.nickName
+    store.user.gender = info.gender
+    store.user.country = info.country
+    store.user.avatar = info.avatarUrl
+    store.user.province = info.province
   })
 })
 
