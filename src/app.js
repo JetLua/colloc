@@ -134,7 +134,7 @@ call({
     wx.requestSubscribeMessage({
       tmplIds: [id],
       success: async ({[id]: result}) => {
-        if (!store.id || result === 'reject') return
+        if (result === 'reject') return
         call({
           name: 'subscribe',
           data: {subscribe: true}
