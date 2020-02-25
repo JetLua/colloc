@@ -25,7 +25,7 @@
     "@babel/preset-env": "^7.8.4",
     "@babel/runtime": "^7.8.4",
     "@babel/runtime-corejs3": "^7.8.4",
-    "@iro/interaction": "^1.0.3",
+    "@iro/interaction": "^1.0.4",
     "@iro/wechat-adapter": "^0.1.7",
     "@pixi/unsafe-eval": "^5.2.1",
     "babel-loader": "latest",
