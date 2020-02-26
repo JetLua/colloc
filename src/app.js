@@ -1,6 +1,7 @@
 import {stage, monitor} from './core'
 import {store, sound} from './modules'
 import {login, call, ad} from './modules/wx'
+import {delay} from './modules/util'
 import {preload, entry, setting, selector, game} from './scenes'
 
 {
@@ -21,6 +22,7 @@ Promise.all([
   GameGlobal.show,
 ]).then(() => {
   monitor.emit('scene:go', 'entry')
+  delay(1).then(() => ad.show('adunit-e0ecc6cf322cb27a', 'splash').catch(console.log))
 }).then(() => {
   login().catch(() => null).then(async info => {
     const {user, setting} = store
@@ -100,12 +102,12 @@ Promise.all([
 }
 
 /* 检查更新 */
-{
+monitor.on('wx:show', () => {
   const manager = wx.getUpdateManager()
   manager.onUpdateReady(() => {
     manager.applyUpdate()
   })
-}
+})
 
 /* 转发 */
 wx.showShareMenu({withShareTicket: true})
