@@ -27,6 +27,7 @@ export default {
     stage.addChild(container)
     this.listen()
     ticker.add(this.update.bind(this))
+    GameGlobal.hint = this.hint.bind(this)
   },
 
   render() {
@@ -387,16 +388,12 @@ export default {
     const {baffles} = this
     for (const baffle of baffles) {
       if (!baffle.shadow) continue
-
       const anime = tween({
         from: baffle.angle,
         to: baffle.shadow,
         duration: 3e2,
         ease: easing.easeInOut
-      }).start({
-        update: v => baffle._destroyed ? anime.stop() : baffle.angle = v,
-        complete: () => baffle.interactive = true
-      })
+      }).start(v => baffle._destroyed ? anime.stop() : baffle.angle = v)
     }
   },
 
