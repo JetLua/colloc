@@ -1,10 +1,11 @@
 const os = require('os')
 const path = require('path')
 const webpack = require('webpack')
+const TerserPlugin = require('terser-webpack-plugin')
 
 const prod = process.argv.includes('-p')
 
-module.exports = {
+const conf = {
   entry: [
     '@iro/wechat-adapter',
     './src/app.js'
@@ -61,3 +62,22 @@ module.exports = {
 
   mode: prod ? 'production' : 'development'
 }
+
+if (prod) {
+  conf.optimization = {
+    minimize: true,
+    minimizer: [
+      new TerserPlugin({
+        parallel: 4,
+        extractComments: false,
+        terserOptions: {
+          output: {
+            comments: false
+          }
+        },
+      })
+    ]
+  }
+}
+
+module.exports = conf

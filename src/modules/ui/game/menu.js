@@ -1,6 +1,7 @@
-import {stage, screen, renderer, zoom} from '../../../core'
-import {store, sound} from '../../../modules'
+import store from '../../store'
 import {tween} from 'popmotion'
+import * as sound from '../../sound'
+import {stage, screen, renderer, zoom} from '../../../core'
 
 const r = 160
 const {cos, sin, PI, min} = Math
