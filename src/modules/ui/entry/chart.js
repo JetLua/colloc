@@ -1,6 +1,6 @@
-import {screen, stage, zoom} from '../../../core'
-import {store} from '../../../modules'
+import store from '../../store'
 import {db, call} from '../../wx'
+import {screen, stage, zoom} from '../../../core'
 
 const padding = 30
 const {min, sign, max} = Math
@@ -19,6 +19,7 @@ export default {
       .endFill()
 
     this.shadow = shadow
+    this.shadow.visible = false
 
     shadow.zIndex = 5
     shadow.name = 'shadow'
@@ -81,10 +82,12 @@ export default {
         .catch(() => null)
 
       if (!data) return wx.showToast({title: '数据拉取失败', icon: 'none'})
+      if (!data.length && !this.cursor) return wx.showToast({title: '没有数据', icon: 'none'})
+
       if (!data.length) {
         let prev = list.getChildByName('prev')
         let next = list.getChildByName('next')
-        this.cursor--
+        this.cursor > 0 && this.cursor--
         next?.destroy({children: true})
         next = null
         if (this.cursor) {
@@ -192,6 +195,8 @@ export default {
 
       own.addChild(alexa, name, avatar, level)
     }
+
+    this.shadow.visible = true
   },
 
   text(name) {
@@ -236,7 +241,6 @@ export default {
 
   show() {
     if (this.shadow) {
-      this.shadow.visible = true
       this.render('list')
       this.render('own')
       return

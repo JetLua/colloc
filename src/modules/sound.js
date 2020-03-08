@@ -1,6 +1,7 @@
-import {store} from '../modules'
+import store from './store'
+import {ROOT} from './wx'
 
-const baseUrl = `${BASE}/sounds`
+const baseUrl = `${ROOT}/sounds`
 
 function _play({name, volume = 1, loop = false, autoplay = true}) {
   const sound = wx.createInnerAudioContext()

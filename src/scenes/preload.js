@@ -7,6 +7,7 @@ export default async function() {
 
   await mkdir('fonts')
   await mkdir('animes')
+  await mkdir('sounds')
   await mkdir('textures')
 
   const items = await Promise.all([
@@ -18,6 +19,19 @@ export default async function() {
     download(`${BASE}/animes/guide_tex.json`, 'animes/guide_tex.json'),
     download(`${BASE}/animes/guide_ske.json`, 'animes/guide_ske.json'),
     download(`${BASE}/fonts/RalewaySemiBold`, 'fonts/RalewaySemiBold'),
+    // 音效
+    download(`${BASE}/sounds/win.mp3`, 'sounds/win.mp3'),
+    download(`${BASE}/sounds/tap.mp3`, 'sounds/tap.mp3'),
+    download(`${BASE}/sounds/bgm.mp3`, 'sounds/bgm.mp3'),
+    download(`${BASE}/sounds/back.mp3`, 'sounds/back.mp3'),
+    download(`${BASE}/sounds/fail.mp3`, 'sounds/fail.mp3'),
+    download(`${BASE}/sounds/reset.mp3`, 'sounds/reset.mp3'),
+    download(`${BASE}/sounds/collide.mp3`, 'sounds/collide.mp3'),
+    download(`${BASE}/sounds/transfer.mp3`, 'sounds/transfer.mp3'),
+    download(`${BASE}/sounds/collide.arrow.mp3`, 'sounds/collide.arrow.mp3'),
+    download(`${BASE}/sounds/collide.gear.mp3`, 'sounds/collide.gear.mp3'),
+    download(`${BASE}/sounds/collide.green.mp3`, 'sounds/collide.green.mp3'),
+    download(`${BASE}/sounds/collide.once.mp3`, 'sounds/collide.once.mp3')
   ])
 
   GameGlobal.font = wx.loadFont(`${ROOT}/fonts/RalewaySemiBold`)
