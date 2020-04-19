@@ -17,7 +17,12 @@ exports.main = async (event, context) => {
     .then(({data}) => data[0])
     .catch(() => null)
 
-  if (!data || data.timestamp < event.timestamp) data = event
+  data &&
+  data.user &&
+  (data.user.level || 0) > event.user.level &&
+  (event.user.level = data.user.level)
+
+  if (!data || (data.timestamp || 0) < event.timestamp) data = event
 
   delete data._id
 
