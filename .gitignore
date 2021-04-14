@@ -1,0 +1,4 @@
+node_modules
+package-lock.json
+dist/root/game.js
+dist/root/game.js.map

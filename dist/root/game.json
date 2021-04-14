@@ -1,0 +1,26 @@
+{
+  "deviceOrientation": "portrait",
+  "showStatusBar": false,
+	"openDataContext": "context",
+  "cloud": true,
+  "navigateToMiniProgramAppIdList": [
+    "wx30277eaf6bab6b65"
+  ],
+  "lockStepOptions": {
+    "gameTick": 20,
+    "offlineTimeLength": 15000,
+    "dataType": "String",
+    "UDPReliabilityStrategy": 3,
+    "heartBeatTick": 2000
+  },
+  "subpackages": [
+    {
+      "name": "colloc",
+      "root": "colloc/"
+    },
+    {
+      "name": "sudoku",
+      "root": "sudoku/"
+    }
+  ]
+}
