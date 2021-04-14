@@ -3,9 +3,6 @@
   "showStatusBar": false,
 	"openDataContext": "context",
   "cloud": true,
-  "navigateToMiniProgramAppIdList": [
-    "wx30277eaf6bab6b65"
-  ],
   "lockStepOptions": {
     "gameTick": 20,
     "offlineTimeLength": 15000,

@@ -1,0 +1,46 @@
+{
+"frames": {
+	"zero.bkg.jpg": {
+		"frame": {"x":0, "y":0, "w":630, "h":410},
+		"spriteSourceSize": {"x":0,"y":0,"w":630,"h":410},
+		"sourceSize": {"w":630,"h":410},
+		"anchor": {"x":0.5,"y":0.5}
+	},
+	"zero.fish.1.png": {
+		"frame": {"x":516, "y":494, "w":193, "h":94},
+		"spriteSourceSize": {"x":0,"y":0,"w":193,"h":94},
+		"sourceSize": {"w":193,"h":94},
+		"anchor": {"x":0.5,"y":0.5}
+	},
+	"zero.fish.2.png": {
+		"frame": {"x":516, "y":414, "w":209, "h":76},
+		"spriteSourceSize": {"x":0,"y":0,"w":209,"h":76},
+		"sourceSize": {"w":209,"h":76},
+		"anchor": {"x":0.5,"y":0.5}
+	},
+	"zero.fish.3.png": {
+		"frame": {"x":516, "y":701, "w":148, "h":93},
+		"spriteSourceSize": {"x":0,"y":0,"w":148,"h":93},
+		"sourceSize": {"w":148,"h":93},
+		"anchor": {"x":0.5,"y":0.5}
+	},
+	"zero.fish.4.png": {
+		"frame": {"x":516, "y":592, "w":177, "h":105},
+		"spriteSourceSize": {"x":0,"y":0,"w":177,"h":105},
+		"sourceSize": {"w":177,"h":105},
+		"anchor": {"x":0.5,"y":0.5}
+	},
+	"zero.overlay.png": {
+		"frame": {"x":0, "y":414, "w":512, "h":512},
+		"spriteSourceSize": {"x":0,"y":0,"w":512,"h":512},
+		"sourceSize": {"w":512,"h":512},
+		"anchor": {"x":0.5,"y":0.5}
+	}
+
+},
+"meta": {
+	"image": "zero.png",
+	"size": {"w": 729, "h": 930},
+	"scale": "1"
+}
+}

@@ -66,9 +66,8 @@ module.exports = ({prod} = {}) => {
     plugins: [
       new webpack.DefinePlugin({
         PROD: JSON.stringify(prod),
-        CLOUD_ID: JSON.stringify('dev-5gzc9ls3a9769b9e'),
-        VERSION: JSON.stringify(require('./package.json').version),
-        CDN: JSON.stringify('cloud://dev-5gzc9ls3a9769b9e.6465-dev-5gzc9ls3a9769b9e-1259687088')
+        CLOUD_ID: JSON.stringify('zero-7gi05c0t5d37e3cf'),
+        CDN: JSON.stringify('cloud://zero-7gi05c0t5d37e3cf.7a65-zero-7gi05c0t5d37e3cf-1258618978')
       }),
 
       new webpack.ProvidePlugin({
