@@ -7,8 +7,9 @@ export function play(id: string, opt: {volume?: number, loop?: boolean } = {}) {
   const sound = cache[id] || wx.createInnerAudioContext()
   sound.volume = opt.volume ?? 1
   getSrc(id).then(src => {
-    console.log(src)
+    // todo
     sound.src = src
+    sound.autoplay = true
     sound.seek(0)
     sound.play()
   })
@@ -29,7 +30,7 @@ function getSrc(id: string) {
     if (err) {
       cloud.download(`${CDN}/sound/${id}`).then(([result, err]) => {
         if (err) return wx.showToast({title: err.message, icon: 'error'})
-        fs.save(result, `sound/${id}`).then(console.log)
+        fs.save(result, `sound/${id}`)
       })
       return `${CDN}/sound/${id}`
     }
