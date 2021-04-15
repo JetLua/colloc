@@ -12,7 +12,7 @@ module.exports = ({prod} = {}) => {
           'pixi.js',
           './src/core',
           './src/module',
-          './src/app.ts'
+          './src/fishpond/app.ts'
         ],
         filename: 'game.js'
       },

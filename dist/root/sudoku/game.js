@@ -1,4 +1,4 @@
-(GameGlobal["webpackChunkparabox"] = GameGlobal["webpackChunkparabox"] || []).push([["sudoku"],{
+(GameGlobal["webpackChunkzero"] = GameGlobal["webpackChunkzero"] || []).push([["sudoku"],{
 
 /***/ "./src/sudoku/app.ts":
 /*!***************************!*\

@@ -1,4 +1,4 @@
-(GameGlobal["webpackChunkparabox"] = GameGlobal["webpackChunkparabox"] || []).push([["colloc"],{
+(GameGlobal["webpackChunkzero"] = GameGlobal["webpackChunkzero"] || []).push([["colloc"],{
 
 /***/ "./src/colloc/app.ts":
 /*!***************************!*\
