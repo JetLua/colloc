@@ -2,7 +2,6 @@ import * as PIXI from 'pixi.js'
 import {DropShadowFilter} from '@pixi/filter-drop-shadow'
 
 import {stage, loader, screen, ticker} from '~/core'
-import {sound} from './module'
 
 loader.add('static/texture/zero.json').load(main)
 
