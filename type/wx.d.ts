@@ -258,7 +258,188 @@ declare module wx {
     pixelRatio: number
   }
 
-  type Callback<T>  = T & Omit<Partial<{
+  function onShow(opt: (opt: {
+    scene: string
+    query: any
+    shareTicket: string
+    referrerInfo: {
+      appId: string
+      extraData: any
+    }
+  }) => void): void
+
+  function offShow(opt: () => void): void
+
+  function onHide(opt: () => void): void
+
+  function offHide(opt: () => void): void
+
+  function shareAppMessage(opt: {
+    title?: string
+    imageUrl?: string
+    query?: string
+    imageUrlId?: string
+  }): void
+
+  function onShareAppMessage(opt: () => {
+    title?: string
+    imageUrl?: string
+    query?: string
+    imageUrlId?: string
+  }): void
+
+  function onShareTimeline(opt: () => {
+    title?: string
+    imageUrl?: string
+    query?: string
+  }): void
+
+  function showActionSheet(opts: Callback<{
+    itemList: string[]
+    itemColor?: string
+    success?: (opt: {tapIndex: number}) => void
+  }>): void
+
+  interface IUserInfo {
+    userInfo: {
+      nickName: string
+      avatarUrl: string
+      /** 0: 未知 1: 男 2: 女 */
+      gender: 0 | 1 | 2
+      country: string
+      city: string
+      province: string
+      language: 'en' | 'zh_CN' | 'zh_TW'
+    }
+    iv: string
+    errMsg?: string
+    rawData: string
+    signature: string
+    encryptedData: string
+  }
+
+  function createUserInfoButton(opts: {
+    type: 'text' | 'image'
+    text?: string
+    image?: string
+    withCredentials?: boolean
+    lang?: 'en' | 'zh_CN' | 'zh_TW'
+    style: {
+      left: number
+      top: number
+      width: number
+      height: number
+      backgroundColor: string
+      borderColor?: string
+      borderWidth?: number
+      borderRadius?: number
+      color: string
+      textAlign: 'left' | 'center' | 'right'
+      fontSize: number
+      lineHeight: number
+    }
+  }): {
+    show: () => void
+    hide: () => void
+    destroy: () => void
+    onTap: (cb: (info: IUserInfo) => void) => void
+    offTap: () => void
+  }
+
+  function getUserInfo(opts: Callback<{
+    withCredentials?: boolean
+    lang?: 'en' | 'zh_CN' | 'zh_TW'
+    success?: (info: IUserInfo) => void
+  }>): void
+
+  function onAudioInterruptionEnd(cb: () => void): void
+
+  interface IBannerAd {
+    style: {
+      top: number
+      left: number
+      width: number
+      height: number
+    }
+    show: () => Promise<unknown>
+    hide: () => Promise<unknown>
+    destroy: () => void
+    onError: (cb: (opts: {errMsg: string, errCode: number}) => void) => void
+    onResize: (cb: (opts: {width: number, height: number}) => void) => void
+  }
+
+  function createBannerAd(opt: {
+    adUnitId: string
+    adIntervals?: number
+    style?: {
+      top?: number
+      left?: number
+      width?: number
+      height?: number
+    }
+  }): IBannerAd
+
+  interface IGameClubButton {
+    show: () => void
+    hide: () => void
+    style: Partial<{
+      left: number
+      right: number
+      top: number
+      width: number
+      height: number
+      backgroundColor: number
+      borderColor: number
+      borderWidth: number
+      borderRadius: number
+      color: string
+      textAlign: 'left' | 'center' | 'right'
+      fontSize: number
+      lineHeight: number
+    }>
+  }
+
+  function createGameClubButton(opts: {
+    type?: 'text' | 'string'
+    text?: string
+    image?: string
+    icon: 'green' | 'white' | 'dark' | 'light'
+  } & Pick<IGameClubButton, 'style'>): IGameClubButton
+
+  interface ICustomAd {
+    show: () => Promise<unknown>
+    hide: () => Promise<unknown>
+    destroy: () => void
+    onError: (cb: (opts: {errMsg: string, errCode: number}) => void) => void
+  }
+
+  function createCustomAd(opt: {
+    adUnitId: string
+    adIntervals?: number
+    style?: {
+      left?: number
+      top?: number
+      fixed?: boolean
+    }
+  }): ICustomAd
+
+  interface IInterstitialAd {
+    show: () => Promise<unknown>
+    hide: () => void
+    destroy: () => void
+    onLoad: (cb: () => void) => void
+    onError: (cb: (opts: {errMsg: string, errCode: number}) => void) => void
+    onClose: (cb: () => void) => void
+    offClose: (cb: () => void) => void
+  }
+
+  function createInterstitialAd(opts: {
+    adUnitId: string
+  }): IInterstitialAd
+
+  function loadFont(path: string): string
+
+  type Callback<T> = T & Omit<Partial<{
     fail: (...args: any[]) => void
     success: (...args: any[]) => void
     complete: () => void

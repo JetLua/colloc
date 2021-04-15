@@ -1,17 +1,12 @@
 import * as PIXI from 'pixi.js'
 import {DropShadowFilter} from '@pixi/filter-drop-shadow'
 
-import * as core from '~/core'
+import {stage, loader, screen, ticker} from '~/core'
 import {sound} from './module'
 
-// 子包共享
-window._core = core
-window._pixi = PIXI
-
-core.loader.add('static/texture/zero.json').load(main)
+loader.add('static/texture/zero.json').load(main)
 
 function main() {
-  const {screen, stage, ticker, renderer} = core
   const {max, sin, cos, random, PI} = Math
   const PI2 = PI * 2
   const PI_2 = PI / 2
@@ -84,24 +79,27 @@ function main() {
       const fish = fishes[i]
       const ok = fish.containsPoint(e)
       if (!ok) continue
-      fish.stopped = true
+      fish.stopped = {x: e.x, y: e.y}
       touches[e.id] = fish
       break
     }
   }).on('pointermove', (e: IEvent) => {
     const fish = touches[e.id]
     if (!fish) return
-    fish.position.copyFrom(e)
+    fish.x += e.x - fish.stopped.x
+    fish.y += e.y - fish.stopped.y
+    fish.stopped.x = e.x
+    fish.stopped.y = e.y
   }).on('pointerup', (e: IEvent) => {
     const fish = touches[e.id]
     if (!fish) return
-    fish.stopped = false
+    fish.stopped = null
     delete touches[e.id]
   })
 
-  window.interaction.then(() => {
-    sound.play(['1.mp3', '2.mp3'][Math.random() * 2 | 0])
-  })
+  setTimeout(() => {
+    wx.loadSubpackage({name: 'colloc'})
+  }, 3000)
 }
 
 window.interaction = new Promise(resolve => {
@@ -112,7 +110,7 @@ window.interaction = new Promise(resolve => {
 })
 
 interface IFish extends PIXI.Sprite {
-  stopped?: boolean
+  stopped?: {x: number, y: number}
   speed?: number
   direction?: number
   turnSpeed?: number

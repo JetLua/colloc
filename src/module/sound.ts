@@ -3,25 +3,23 @@ import {fs, cloud} from './wx'
 const cache: {[k: string]: wx.IInnerAudioContext} = {}
 const prefix = 'sound'
 
-export function play(id: string, opt: {volume?: number, loop?: boolean } = {}) {
-  const sound = cache[id] || wx.createInnerAudioContext()
-  sound.volume = opt.volume ?? 1
-  getSrc(id).then(src => {
-    // todo
-    sound.src = src
-    sound.autoplay = true
-    sound.seek(0)
-    sound.play()
-  })
-  return cache[id] = sound
-}
-
-export function load(id: string, opt: {volume?: number, loop?: boolean} = {}) {
-  const sound = cache[id] || wx.createInnerAudioContext()
-  sound.loop = opt.loop
-  sound.volume = opt.volume ?? 1
-  sound.src = `${prefix}/${id}`
-  return cache[id] = sound
+export function play(id: string, opts: {volume?: number, loop?: boolean, reset?: boolean} = {}) {
+  if (cache[id]) {
+    const sound = cache[id]
+    sound.volume = opts.volume
+    opts.reset && sound.seek(0)
+    sound.paused && sound.play()
+    return sound
+  } else {
+    const sound = cache[id] = wx.createInnerAudioContext()
+    sound.volume = opts.volume ?? 1
+    getSrc(id).then(src => {
+      sound.src = src
+      sound.loop = opts.loop
+      sound.autoplay = true
+    })
+    return sound
+  }
 }
 
 function getSrc(id: string) {
