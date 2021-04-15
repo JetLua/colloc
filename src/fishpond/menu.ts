@@ -14,12 +14,13 @@ export function show(opts: {parent: PIXI.Container}) {
   menu.on('pointerdown', (e: IEvent) => {
     const target = e.target as IMenu
     target.stop?.()
+    target.rotation = 0
     target.stop = animate({
-      from: {scale: target.scale.x, rotation: target.rotation},
-      to: {scale: target.scale.x * 1.2, rotation: target.rotation + Math.PI / 2},
+      from: target.scale.x,
+      to: target.scale.x * 1.2,
       duration: 3e2,
       onUpdate: v => {
-        target.scale.set(v.scale)
+        target.scale.set(v)
       }
     }).stop
   }).on('pointerup', onMenuUp).on('pointerupoutside', onMenuUp)
@@ -28,6 +29,7 @@ export function show(opts: {parent: PIXI.Container}) {
 function onMenuUp(e: IEvent) {
   const target = e.target as IMenu
   target.stop?.()
+  target.interactive = false
   target.stop = animate({
     from: {scale: target.scale.x, rotation: target.rotation},
     to: {scale: 1, rotation: target.rotation + Math.PI / 2},
@@ -35,7 +37,8 @@ function onMenuUp(e: IEvent) {
     onUpdate: v => {
       target.scale.set(v.scale)
       target.rotation = v.rotation
-    }
+    },
+    onComplete: () => target.interactive = true
   }).stop
 }
 
