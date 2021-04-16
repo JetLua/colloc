@@ -6,10 +6,13 @@ import {screen} from '~/core'
 let parent: PIXI.Container
 
 export function show(opts: {parent: PIXI.Container}) {
+  parent = opts.parent
+
   const menu = PIXI.Sprite.from('zero.btn.menu.png') as IMenu
   menu.interactive = true
+  menu.zIndex = 5
   menu.position.set(screen.width / 2, screen.height - 100)
-  opts.parent.addChild(menu)
+  parent.addChild(menu)
 
   menu.on('pointerdown', (e: IEvent) => {
     const target = e.target as IMenu

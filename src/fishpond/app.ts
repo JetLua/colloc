@@ -1,9 +1,14 @@
 import * as PIXI from 'pixi.js'
+import {animate} from 'popmotion'
 import {DropShadowFilter} from '@pixi/filter-drop-shadow'
 
+import {createPromise, delay} from '~/util'
 import {stage, loader, screen, ticker} from '~/core'
+
 import Fish from './Fish'
 import * as menu from './menu'
+import * as bubble from './bubble'
+import * as widget from './widget'
 
 loader
   .add('static/texture/zero.json')
@@ -28,6 +33,44 @@ function main() {
   bed.position.set(screen.width / 2, screen.height / 2)
   scene.addChild(bed)
 
+  // 气泡
+  void async function loop() {
+    for (let k = 0; k < 3; k++) {
+      const x = 50 + (screen.width - 50) * random() | 0
+      const y = screen.height * random() | 0
+
+      void async function() {
+        for (let i = 0; i < 3; i++) {
+          const item = bubble.get()
+          item.scale.set(0)
+          item.position.set(x, y)
+          scene.addChild(item)
+          const [promise, resolve] = createPromise()
+          animate({
+            from: {alpha: 0, scale: 0, y, progress: 0},
+            to: {alpha: 1, scale: 1, y: y - 120, progress: 1},
+            duration: 3e3,
+            onUpdate: v => {
+              item.y = v.y
+              item.alpha = v.alpha
+              item.scale.set(v.scale)
+              if (v.progress > .3) resolve()
+            },
+            onComplete: () => {
+              bubble.put(item)
+            }
+          })
+          await promise
+        }
+      }()
+
+      await delay(random() * 2 + 1)
+    }
+
+    await delay(random() * 3 + 3)
+    loop()
+  }()
+
   // 潭中鱼可百许头
   const fishes = Object.entries(Fish.Color).map(([k, v]) => {
     const fish = new Fish(v)
@@ -45,6 +88,7 @@ function main() {
   {
     // 左上
     let lotus = PIXI.Sprite.from('zero.lotus.leaf.6.png')
+    lotus.zIndex = 3
     lotus.scale.set(.5)
     lotus.anchor.set(0)
     scene.addChild(lotus)
@@ -52,6 +96,7 @@ function main() {
     // 右上
     lotus = PIXI.Sprite.from('zero.lotus.leaf.3.png')
     lotus.anchor.set(1, 0)
+    lotus.zIndex = 3
     lotus.x = screen.width
     scene.addChild(lotus)
 
@@ -59,11 +104,13 @@ function main() {
     lotus = PIXI.Sprite.from('zero.lotus.leaf.7.png')
     lotus.anchor.set(.5, 1)
     lotus.y = screen.height
+    lotus.zIndex = 3
     lotus.x = screen.width / 2
     scene.addChild(lotus)
   }
 
-  menu.show(scene)
+  menu.show({parent: scene})
+  widget.show({parent: scene})
 
   const bound = screen.clone().pad(100)
 
@@ -84,4 +131,8 @@ function main() {
       fish.y > bound.bottom ? fish.y = bound.top : 0
     }
   })
+}
+
+function toggle() {
+
 }
