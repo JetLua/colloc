@@ -1,4 +1,3 @@
-import * as PIXI from 'pixi.js'
 import {install} from '@pixi/unsafe-eval'
 import Interaction from '@iro/interaction'
 

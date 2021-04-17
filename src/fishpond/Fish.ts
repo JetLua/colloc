@@ -1,5 +1,3 @@
-import * as PIXI from 'pixi.js'
-
 enum Color {
   Red = 'red',
   Blue = 'blue',

@@ -1,4 +1,3 @@
-import * as PIXI from 'pixi.js'
 import {animate} from 'popmotion'
 import {DropShadowFilter} from '@pixi/filter-drop-shadow'
 
@@ -33,41 +32,23 @@ function main() {
   bed.position.set(screen.width / 2, screen.height / 2)
   scene.addChild(bed)
 
-  // 气泡
   void async function loop() {
-    for (let k = 0; k < 3; k++) {
-      const x = 50 + (screen.width - 50) * random() | 0
-      const y = screen.height * random() | 0
+    await Promise.all(Array.from({length: 3}, () => {
+      const [promise, resolve] = createPromise()
+      const x = 100 + (screen.width - 100) * random()
+      const y = 100 + (screen.height - 100) * random()
 
-      void async function() {
-        for (let i = 0; i < 3; i++) {
-          const item = bubble.get()
-          item.scale.set(0)
-          item.position.set(x, y)
-          scene.addChild(item)
-          const [promise, resolve] = createPromise()
-          animate({
-            from: {alpha: 0, scale: 0, y, progress: 0},
-            to: {alpha: 1, scale: 1, y: y - 120, progress: 1},
-            duration: 3e3,
-            onUpdate: v => {
-              item.y = v.y
-              item.alpha = v.alpha
-              item.scale.set(v.scale)
-              if (v.progress > .3) resolve()
-            },
-            onComplete: () => {
-              bubble.put(item)
-            }
-          })
-          await promise
-        }
-      }()
+      const bub = bubble.get()
+      bub.position.set(x, y)
+      scene.addChild(bub)
+      bub.animate({
+        duration: 1 + 3 * random(),
+        onComplete: resolve
+      })
+      return promise
+    }))
 
-      await delay(random() * 2 + 1)
-    }
-
-    await delay(random() * 3 + 3)
+    await delay(1 + 3 * random())
     loop()
   }()
 
@@ -110,6 +91,9 @@ function main() {
   }
 
   menu.show({parent: scene})
+  menu.on('pointerup', () => {
+    widget.toggle()
+  })
   widget.show({parent: scene})
 
   const bound = screen.clone().pad(100)
@@ -131,8 +115,4 @@ function main() {
       fish.y > bound.bottom ? fish.y = bound.top : 0
     }
   })
-}
-
-function toggle() {
-
 }

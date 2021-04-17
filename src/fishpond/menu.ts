@@ -1,14 +1,14 @@
-import * as PIXI from 'pixi.js'
 import {animate} from 'popmotion'
 
 import {screen} from '~/core'
 
+let menu: PIXI.Sprite
 let parent: PIXI.Container
 
 export function show(opts: {parent: PIXI.Container}) {
   parent = opts.parent
 
-  const menu = PIXI.Sprite.from('zero.btn.menu.png') as IMenu
+  menu = PIXI.Sprite.from('zero.btn.menu.png') as IMenu
   menu.interactive = true
   menu.zIndex = 5
   menu.position.set(screen.width / 2, screen.height - 100)
@@ -27,6 +27,10 @@ export function show(opts: {parent: PIXI.Container}) {
       }
     }).stop
   }).on('pointerup', onMenuUp).on('pointerupoutside', onMenuUp)
+
+  const subs = ['info', 'sale', 'up', 'voice'].map((id, i, {length}) => {
+    const half = length / 2
+  })
 }
 
 function onMenuUp(e: IEvent) {
@@ -43,6 +47,10 @@ function onMenuUp(e: IEvent) {
     },
     onComplete: () => target.interactive = true
   }).stop
+}
+
+export function on(name: string, cb: (...args: []) => void) {
+  menu.on(name, cb)
 }
 
 interface IMenu extends PIXI.Sprite {

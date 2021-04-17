@@ -9,9 +9,6 @@ module.exports = ({prod} = {}) => {
       main: {
         import: [
           '@iro/wechat-adapter',
-          'pixi.js',
-          './src/core',
-          './src/module',
           './src/fishpond/app.ts'
         ],
         filename: 'game.js'
@@ -71,7 +68,7 @@ module.exports = ({prod} = {}) => {
       }),
 
       new webpack.ProvidePlugin({
-        dragonBones: 'dragonbones.js'
+        PIXI: 'pixi.js',
       })
     ],
 

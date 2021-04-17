@@ -1,5 +1,3 @@
-import * as PIXI from 'pixi.js'
-
 let {
   windowWidth: width,
   windowHeight: height,

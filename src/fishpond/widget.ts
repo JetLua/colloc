@@ -1,31 +1,71 @@
-import * as PIXI from 'pixi.js'
-
+import {animate} from 'popmotion'
 import {screen} from '~/core'
 
-export function show(opts: {parent: PIXI.Container}) {
+const icons: PIXI.Sprite[] = []
+let visible = false
+
+export function show(opts?: {parent: PIXI.Container}) {
+  opts && init(opts)
+  for (const icon of icons) {
+    animate({
+      from: {y: icon.y, alpha: 0},
+      to: {y: icon.y - 30, alpha: 1},
+      duration: 5e2,
+      onUpdate: v => {
+        icon.y = v.y
+        icon.alpha = v.alpha
+      },
+      onComplete: () => {
+        visible = true
+      }
+    })
+  }
+}
+
+export function hide() {
+  for (const icon of icons) {
+    animate({
+      from: {y: icon.y, alpha: 1},
+      to: {y: icon.y + 30, alpha: 0},
+      duration: 5e2,
+      onUpdate: v => {
+        icon.y = v.y
+        icon.alpha = v.alpha
+      },
+      onComplete: () => {
+        visible = false
+      }
+    })
+  }
+}
+
+export function toggle() {
+ visible ? hide() : show()
+}
+
+function init(opts: Parameters<typeof show>[0]) {
   // 左边
-  ['carbon', 'oxygen'].forEach((id, i, {length}) => {
+  ['carbon', 'oxygen', 'sum', 'usage'].forEach((id, i, {length}) => {
     const icon = PIXI.Sprite.from(`zero.icon.${id}.png`)
-    const half = length / 2 + (length % 2 ? -.5 : .5)
+    const half = length / 2 - .5
 
-    icon.x = icon.width / 2
-    icon.y = screen.height / 2 + icon.height * (i - half) * 1.5
-
+    icon.x = icon.width / 2 + 10
+    icon.y = screen.height / 2 + (icon.height + 30) * (i - half)
+    icon.y += 30
+    icons.push(icon)
     opts.parent.addChild(icon)
   })
 
   // 右边
-  void ['sum', 'usage'].forEach((id, i, {length}) => {
+  void ['feed', 'fish'].forEach((id, i, {length}) => {
     const icon = PIXI.Sprite.from(`zero.icon.${id}.png`)
-    const half = length / 2 + (length % 2 ? -.5 : .5)
+    const half = length / 2 - .5
 
-    icon.x = screen.width - icon.width / 2
-    icon.y = screen.height / 2 + icon.height * (i - half) * 1.5
+    icon.x = screen.width - icon.width / 2 - 10
+    icon.y = screen.height / 2 + (icon.height + 30) * (i - half)
+    icon.y += 30
 
+    icons.push(icon)
     opts.parent.addChild(icon)
   })
-}
-
-export function hide() {
-
 }
