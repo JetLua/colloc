@@ -90,11 +90,8 @@ function main() {
     scene.addChild(lotus)
   }
 
-  menu.show({parent: scene})
-  menu.on('pointerup', () => {
-    widget.toggle()
-  })
-  widget.show({parent: scene})
+  widget.init({parent: scene})
+  menu.init({parent: scene})
 
   const bound = screen.clone().pad(100)
 

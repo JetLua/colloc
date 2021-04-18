@@ -7,6 +7,8 @@ let visible = false
 export function show(opts?: {parent: PIXI.Container}) {
   opts && init(opts)
   for (const icon of icons) {
+    icon.visible = true
+    icon.alpha = 0
     animate({
       from: {y: icon.y, alpha: 0},
       to: {y: icon.y - 30, alpha: 1},
@@ -33,7 +35,8 @@ export function hide() {
         icon.alpha = v.alpha
       },
       onComplete: () => {
-        visible = false
+        visible =
+        icon.visible = false
       }
     })
   }
@@ -43,7 +46,7 @@ export function toggle() {
  visible ? hide() : show()
 }
 
-function init(opts: Parameters<typeof show>[0]) {
+export function init(opts: Parameters<typeof show>[0]) {
   // 左边
   ['carbon', 'oxygen', 'sum', 'usage'].forEach((id, i, {length}) => {
     const icon = PIXI.Sprite.from(`zero.icon.${id}.png`)
@@ -52,6 +55,8 @@ function init(opts: Parameters<typeof show>[0]) {
     icon.x = icon.width / 2 + 10
     icon.y = screen.height / 2 + (icon.height + 30) * (i - half)
     icon.y += 30
+    icon.visible = false
+
     icons.push(icon)
     opts.parent.addChild(icon)
   })
@@ -64,6 +69,7 @@ function init(opts: Parameters<typeof show>[0]) {
     icon.x = screen.width - icon.width / 2 - 10
     icon.y = screen.height / 2 + (icon.height + 30) * (i - half)
     icon.y += 30
+    icon.visible = false
 
     icons.push(icon)
     opts.parent.addChild(icon)
