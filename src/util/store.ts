@@ -1,9 +1,14 @@
+import merge from 'deepmerge'
+
 let store = {
-  file: {} as {[k: string]: string}
+  files: {} as {[k: string]: string},
+  fishpond: {
+    settings: {voice: 1, widget: 1}
+  }
 }
 
 try {
-  store = JSON.parse(localStorage.getItem('store'))
+  store = merge(JSON.parse(localStorage.getItem('store')), store)
 } catch {}
 
 const queue = new WeakSet()

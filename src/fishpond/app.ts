@@ -1,7 +1,7 @@
 import {animate} from 'popmotion'
 import {DropShadowFilter} from '@pixi/filter-drop-shadow'
 
-import {createPromise, delay} from '~/util'
+import {createPromise, delay, store} from '~/util'
 import {stage, loader, screen, ticker} from '~/core'
 
 import Fish from './Fish'
@@ -18,6 +18,7 @@ loader
 const {PI, max, random, cos, sin} = Math
 const PI2 = PI * 2
 const PI_2 = PI / 2
+const {settings} = store.fishpond
 const shadowFilter = new DropShadowFilter({distance: 12, quality: 1, rotation: 180})
 
 function main() {
@@ -90,8 +91,20 @@ function main() {
     scene.addChild(lotus)
   }
 
-  widget.init({parent: scene})
+  settings.widget === 2 ? widget.show({parent: scene}) : widget.init({parent: scene})
   menu.init({parent: scene})
+  menu.on('tap', ({name, onComplete}) => {
+    switch (name) {
+      case 'info': {
+        widget.toggle().then(done => done && onComplete())
+        break
+      }
+
+      default: {
+        onComplete()
+      }
+    }
+  })
 
   const bound = screen.clone().pad(100)
 
