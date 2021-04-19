@@ -6,6 +6,7 @@ declare const CDN: string
 declare const CLOUD_ID: string
 
 interface Window {
+  font: string
   interaction: Promise<wx.IRect>
 }
 

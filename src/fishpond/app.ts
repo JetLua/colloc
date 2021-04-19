@@ -8,6 +8,16 @@ import Fish from './Fish'
 import * as menu from './menu'
 import * as bubble from './bubble'
 import * as widget from './widget'
+import {cloud, fs} from '~/module/wx'
+
+// await new Promise<void>(resolve => {
+//   fs.access('font/Raleway-SemiBold.ttf')
+//   cloud.download(`${CDN}/font/Raleway-SemiBold.ttf`).then(([path, err]) => {
+//     resolve()
+//     if (err) return
+//     fs.save(path, )
+//   })
+// })
 
 loader
   .add('static/texture/zero.json')
