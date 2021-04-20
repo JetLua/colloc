@@ -3,13 +3,21 @@ import merge from 'deepmerge'
 let store = {
   files: {} as {[k: string]: string},
   fishpond: {
-    settings: {voice: 1, widget: 1}
+    settings: {voice: 1, widget: 1},
+    data: {
+      carbon: .1,
+      oxygen: .8,
+      money: 100,
+      capacity: {used: 3, total: 12}
+    }
   }
 }
 
 try {
-  store = merge(JSON.parse(localStorage.getItem('store')), store)
-} catch {}
+  store = merge(store, JSON.parse(localStorage.getItem('store')))
+} catch (err: any) {
+  console.log(err.message)
+}
 
 const queue = new WeakSet()
 const handle = {

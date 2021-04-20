@@ -1,8 +1,10 @@
 import {animate} from 'popmotion'
 import {screen} from '~/core'
-import {createPromise, delay} from '~/util'
+import {createPromise, store} from '~/util'
 
 const icons: IIcon[] = []
+const {data} = store.fishpond
+
 let visible = false
 let toggling = false
 
@@ -80,9 +82,21 @@ export function toggle() {
 
 export function init(opts: Parameters<typeof show>[0]) {
   // 左边
-  ['carbon', 'oxygen', 'sum', 'usage'].forEach((id, i, {length}) => {
+  const textStyle = {
+    fill: 0xffffff,
+    fontFamily: window.font,
+    fontWeight: 'bolder',
+    fontSize: 32
+  } as PIXI.ITextStyle
+
+  ['carbon', 'oxygen', 'money', 'capacity'].forEach((id, i, {length}) => {
     const icon = PIXI.Sprite.from(`zero.icon.${id}.png`) as IIcon
     const half = length / 2 - .5
+    const value = new PIXI.Text(getValue(id), textStyle)
+
+    value.anchor.set(0, .5)
+    value.position.set(icon.width / 2 + 10, 0)
+    icon.addChild(value)
 
     icon.dst = icon.width / 2 + 10
     icon.y = screen.height / 2 + (icon.height + 30) * (i - half)
@@ -104,6 +118,26 @@ export function init(opts: Parameters<typeof show>[0]) {
     icons.push(icon)
     opts.parent.addChild(icon)
   })
+}
+
+function getValue(name: string) {
+  switch (name) {
+    case 'carbon': {
+      return `${(data.carbon * 100) | 0}%`
+    }
+
+    case 'oxygen': {
+      return `${(data.oxygen * 100) | 0}%`
+    }
+
+    case 'money': {
+      return `${data.money}`
+    }
+
+    case 'capacity': {
+      return `${data.capacity.used}/${data.capacity.total}`
+    }
+  }
 }
 
 interface IIcon extends PIXI.Sprite {
