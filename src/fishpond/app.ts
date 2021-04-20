@@ -10,13 +10,21 @@ import * as bubble from './bubble'
 import * as widget from './widget'
 import {cloud, fs} from '~/module/wx'
 
+
+
 // await new Promise<void>(resolve => {
-//   fs.access('font/Raleway-SemiBold.ttf')
-//   cloud.download(`${CDN}/font/Raleway-SemiBold.ttf`).then(([path, err]) => {
-//     resolve()
-//     if (err) return
-//     fs.save(path, )
-//   })
+//   fs.access('font/Raleway-SemiBold.ttf').then(([ok, err]) => {
+//     if (err || !ok) return cloud.download(`${CDN}/font/Raleway-SemiBold.ttf`).then(([tmp, err]) => {
+//       if (err) return Promise.reject(err)
+//       return fs.save(tmp, 'font/Raleway-SemiBold.ttf').then(([path, err]) => {
+//         if (err) return Promise.reject(err)
+//         return path
+//       })
+//     })
+//     return `${fs.root}/font/Raleway-SemiBold.ttf`
+//   }).then(path => {
+//     window.font = wx.loadFont(path)
+//   }).catch(err => console.log(err.message))
 // })
 
 loader
