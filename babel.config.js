@@ -1,7 +1,7 @@
 module.exports = {
   presets: [
     ['@babel/typescript'],
-    ['@babel/env', {useBuiltIns: 'usage', corejs: 3}],
+    ['@babel/env', {useBuiltIns: 'usage', corejs: '3.15'}],
   ],
   plugins: [
     '@babel/plugin-proposal-class-properties',

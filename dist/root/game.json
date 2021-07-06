@@ -13,11 +13,12 @@
   "subpackages": [
     {
       "name": "colloc",
-      "root": "colloc/"
+      "root": "/colloc/"
     },
     {
+      "independent": true,
       "name": "sudoku",
-      "root": "sudoku/"
+      "root": "/sudoku/"
     }
   ]
 }

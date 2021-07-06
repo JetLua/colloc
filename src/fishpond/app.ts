@@ -11,6 +11,14 @@ import * as widget from './widget'
 
 await preload()
 
+wx.loadSubpackage({
+  name: 'colloc',
+
+  success: () => {
+    scene.visible = false
+  }
+})
+
 const {PI, max, random, cos, sin} = Math
 const PI2 = PI * 2
 const PI_2 = PI / 2
@@ -86,9 +94,8 @@ const fishes = Object.entries(Fish.Color).map(([k, v]) => {
   scene.addChild(lotus)
 }
 
-console.log(settings)
-
 settings.widget === 2 ? widget.show({parent: scene}) : widget.init({parent: scene})
+
 menu.init({parent: scene})
 menu.on('tap', ({name, onComplete}) => {
   switch (name) {

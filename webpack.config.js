@@ -23,7 +23,7 @@ module.exports = ({prod} = {}) => {
 
     output: {
       globalObject: 'GameGlobal', // for subpackages
-      path: path.resolve(`dist/root`)
+      path: path.resolve('dist/root')
     },
 
     resolve: {
@@ -63,8 +63,8 @@ module.exports = ({prod} = {}) => {
     plugins: [
       new webpack.DefinePlugin({
         PROD: JSON.stringify(prod),
-        CLOUD_ID: JSON.stringify('zero-7gi05c0t5d37e3cf'),
-        CDN: JSON.stringify('cloud://zero-7gi05c0t5d37e3cf.7a65-zero-7gi05c0t5d37e3cf-1258618978')
+        CLOUD_ID: JSON.stringify('dev-3gxm8dpg90392ec0'),
+        CDN: JSON.stringify('cloud://dev-3gxm8dpg90392ec0.6465-dev-3gxm8dpg90392ec0-1251004721')
       }),
 
       new webpack.ProvidePlugin({
@@ -72,11 +72,10 @@ module.exports = ({prod} = {}) => {
       })
     ],
 
-    mode: 'development',
+    mode: prod ? 'production' : 'development',
   }
 
   if (prod) {
-    conf.mode = 'production'
     conf.optimization = {
       minimize: true,
       minimizer: [

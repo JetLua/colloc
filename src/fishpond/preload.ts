@@ -1,5 +1,5 @@
 import {loader} from '~/core'
-import {cloud, fs, } from '~/module/wx'
+import {cloud, fs} from '~/module/wx'
 
 export default async function() {
   await new Promise(resolve => {
