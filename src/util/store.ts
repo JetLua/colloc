@@ -10,6 +10,10 @@ let store = {
       money: 100,
       capacity: {used: 3, total: 12}
     }
+  },
+  colloc: {
+    level: 0,
+    settings: {voice: 1, music: 1},
   }
 }
 

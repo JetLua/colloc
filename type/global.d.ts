@@ -10,6 +10,11 @@ interface Window {
   interaction: Promise<wx.IRect>
 }
 
+interface IScene {
+  hide: () => void
+  show: (...args: any[]) => void
+}
+
 interface IEvent {
   x: number
   y: number

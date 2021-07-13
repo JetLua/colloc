@@ -11,13 +11,6 @@ import * as widget from './widget'
 
 await preload()
 
-wx.loadSubpackage({
-  name: 'colloc',
-
-  success: () => {
-    scene.visible = false
-  }
-})
 
 const {PI, max, random, cos, sin} = Math
 const PI2 = PI * 2
@@ -127,5 +120,14 @@ ticker.add(() => {
 
     fish.y < bound.top ? fish.y = bound.bottom :
     fish.y > bound.bottom ? fish.y = bound.top : 0
+  }
+})
+
+await delay(1)
+wx.loadSubpackage({
+  name: 'colloc',
+
+  success: () => {
+    scene.visible = false
   }
 })

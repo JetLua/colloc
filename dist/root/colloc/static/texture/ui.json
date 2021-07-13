@@ -1,120 +1,142 @@
 {
 "frames": {
-	"circle.blue.png": {
+	"ui.circle.blue.png": {
+		"frame": {"x":0, "y":154, "w":150, "h":150},
+		"spriteSourceSize": {"x":0,"y":0,"w":150,"h":150},
+		"sourceSize": {"w":150,"h":150},
+		"anchor": {"x":0.5,"y":0.5}
+	},
+	"ui.circle.chart.png": {
 		"frame": {"x":0, "y":0, "w":150, "h":150},
 		"spriteSourceSize": {"x":0,"y":0,"w":150,"h":150},
-		"sourceSize": {"w":150,"h":150}
+		"sourceSize": {"w":150,"h":150},
+		"anchor": {"x":0.5,"y":0.5}
 	},
-	"circle.chart.png": {
-		"frame": {"x":0, "y":304, "w":150, "h":150},
+	"ui.circle.cue.png": {
+		"frame": {"x":154, "y":0, "w":150, "h":150},
 		"spriteSourceSize": {"x":0,"y":0,"w":150,"h":150},
-		"sourceSize": {"w":150,"h":150}
+		"sourceSize": {"w":150,"h":150},
+		"anchor": {"x":0.5,"y":0.5}
 	},
-	"circle.cue.png": {
-		"frame": {"x":0, "y":152, "w":150, "h":150},
+	"ui.circle.custom.png": {
+		"frame": {"x":154, "y":308, "w":150, "h":150},
 		"spriteSourceSize": {"x":0,"y":0,"w":150,"h":150},
-		"sourceSize": {"w":150,"h":150}
+		"sourceSize": {"w":150,"h":150},
+		"anchor": {"x":0.5,"y":0.5}
 	},
-	"circle.custom.png": {
-		"frame": {"x":152, "y":304, "w":150, "h":150},
+	"ui.circle.lock.png": {
+		"frame": {"x":308, "y":154, "w":150, "h":150},
 		"spriteSourceSize": {"x":0,"y":0,"w":150,"h":150},
-		"sourceSize": {"w":150,"h":150}
+		"sourceSize": {"w":150,"h":150},
+		"anchor": {"x":0.5,"y":0.5}
 	},
-	"circle.lock.png": {
-		"frame": {"x":152, "y":0, "w":150, "h":150},
+	"ui.circle.pink.png": {
+		"frame": {"x":308, "y":0, "w":150, "h":150},
 		"spriteSourceSize": {"x":0,"y":0,"w":150,"h":150},
-		"sourceSize": {"w":150,"h":150}
+		"sourceSize": {"w":150,"h":150},
+		"anchor": {"x":0.5,"y":0.5}
 	},
-	"circle.pink.png": {
-		"frame": {"x":152, "y":152, "w":150, "h":150},
+	"ui.circle.setting.png": {
+		"frame": {"x":0, "y":308, "w":150, "h":150},
 		"spriteSourceSize": {"x":0,"y":0,"w":150,"h":150},
-		"sourceSize": {"w":150,"h":150}
+		"sourceSize": {"w":150,"h":150},
+		"anchor": {"x":0.5,"y":0.5}
 	},
-	"circle.setting.png": {
-		"frame": {"x":304, "y":0, "w":150, "h":150},
+	"ui.circle.yellow.png": {
+		"frame": {"x":154, "y":154, "w":150, "h":150},
 		"spriteSourceSize": {"x":0,"y":0,"w":150,"h":150},
-		"sourceSize": {"w":150,"h":150}
+		"sourceSize": {"w":150,"h":150},
+		"anchor": {"x":0.5,"y":0.5}
 	},
-	"circle.yellow.png": {
-		"frame": {"x":304, "y":152, "w":150, "h":150},
-		"spriteSourceSize": {"x":0,"y":0,"w":150,"h":150},
-		"sourceSize": {"w":150,"h":150}
-	},
-	"dot.blue.png": {
-		"frame": {"x":434, "y":406, "w":20, "h":20},
+	"ui.dot.blue.png": {
+		"frame": {"x":193, "y":462, "w":20, "h":20},
 		"spriteSourceSize": {"x":0,"y":0,"w":20,"h":20},
-		"sourceSize": {"w":20,"h":20}
+		"sourceSize": {"w":20,"h":20},
+		"anchor": {"x":0.5,"y":0.5}
 	},
-	"dot.pink.png": {
-		"frame": {"x":434, "y":384, "w":20, "h":20},
+	"ui.dot.pink.png": {
+		"frame": {"x":241, "y":462, "w":20, "h":20},
 		"spriteSourceSize": {"x":0,"y":0,"w":20,"h":20},
-		"sourceSize": {"w":20,"h":20}
+		"sourceSize": {"w":20,"h":20},
+		"anchor": {"x":0.5,"y":0.5}
 	},
-	"dot.yellow.png": {
-		"frame": {"x":434, "y":362, "w":20, "h":20},
+	"ui.dot.yellow.png": {
+		"frame": {"x":217, "y":462, "w":20, "h":20},
 		"spriteSourceSize": {"x":0,"y":0,"w":20,"h":20},
-		"sourceSize": {"w":20,"h":20}
+		"sourceSize": {"w":20,"h":20},
+		"anchor": {"x":0.5,"y":0.5}
 	},
-	"icon.back.png": {
-		"frame": {"x":420, "y":434, "w":56, "h":56},
+	"ui.icon.back.png": {
+		"frame": {"x":308, "y":402, "w":56, "h":56},
 		"spriteSourceSize": {"x":0,"y":0,"w":56,"h":56},
-		"sourceSize": {"w":56,"h":56}
+		"sourceSize": {"w":56,"h":56},
+		"anchor": {"x":0.5,"y":0.5}
 	},
-	"icon.bulb.png": {
-		"frame": {"x":362, "y":434, "w":56, "h":56},
-		"spriteSourceSize": {"x":0,"y":0,"w":56,"h":56},
-		"sourceSize": {"w":56,"h":56}
+	"ui.icon.bulb.png": {
+		"frame": {"x":440, "y":308, "w":43, "h":56},
+		"spriteSourceSize": {"x":6,"y":0,"w":56,"h":56},
+		"sourceSize": {"w":56,"h":56},
+		"anchor": {"x":0.5,"y":0.5}
 	},
-	"icon.diamond.png": {
-		"frame": {"x":304, "y":434, "w":56, "h":56},
-		"spriteSourceSize": {"x":0,"y":0,"w":56,"h":56},
-		"sourceSize": {"w":56,"h":56}
+	"ui.icon.diamond.png": {
+		"frame": {"x":368, "y":402, "w":56, "h":51},
+		"spriteSourceSize": {"x":0,"y":2,"w":56,"h":56},
+		"sourceSize": {"w":56,"h":56},
+		"anchor": {"x":0.5,"y":0.5}
 	},
-	"icon.retry.png": {
-		"frame": {"x":434, "y":304, "w":56, "h":56},
-		"spriteSourceSize": {"x":0,"y":0,"w":56,"h":56},
-		"sourceSize": {"w":56,"h":56}
+	"ui.icon.retry.png": {
+		"frame": {"x":420, "y":457, "w":48, "h":48},
+		"spriteSourceSize": {"x":4,"y":4,"w":56,"h":56},
+		"sourceSize": {"w":56,"h":56},
+		"anchor": {"x":0.5,"y":0.5}
 	},
-	"icon.upload.png": {
-		"frame": {"x":304, "y":304, "w":128, "h":128},
-		"spriteSourceSize": {"x":0,"y":0,"w":128,"h":128},
-		"sourceSize": {"w":128,"h":128}
+	"ui.icon.upload.png": {
+		"frame": {"x":308, "y":308, "w":128, "h":90},
+		"spriteSourceSize": {"x":0,"y":19,"w":128,"h":128},
+		"sourceSize": {"w":128,"h":128},
+		"anchor": {"x":0.5,"y":0.5}
 	},
-	"setting.favor.png": {
-		"frame": {"x":100, "y":456, "w":48, "h":48},
-		"spriteSourceSize": {"x":0,"y":0,"w":48,"h":48},
-		"sourceSize": {"w":48,"h":48}
+	"ui.setting.favor.png": {
+		"frame": {"x":368, "y":457, "w":48, "h":46},
+		"spriteSourceSize": {"x":0,"y":1,"w":48,"h":48},
+		"sourceSize": {"w":48,"h":48},
+		"anchor": {"x":0.5,"y":0.5}
 	},
-	"setting.music.off.png": {
-		"frame": {"x":150, "y":456, "w":48, "h":48},
-		"spriteSourceSize": {"x":0,"y":0,"w":48,"h":48},
-		"sourceSize": {"w":48,"h":48}
+	"ui.setting.music.off.png": {
+		"frame": {"x":100, "y":462, "w":43, "h":43},
+		"spriteSourceSize": {"x":2,"y":2,"w":48,"h":48},
+		"sourceSize": {"w":48,"h":48},
+		"anchor": {"x":0.5,"y":0.5}
 	},
-	"setting.music.png": {
-		"frame": {"x":50, "y":456, "w":48, "h":48},
-		"spriteSourceSize": {"x":0,"y":0,"w":48,"h":48},
-		"sourceSize": {"w":48,"h":48}
+	"ui.setting.music.png": {
+		"frame": {"x":147, "y":462, "w":42, "h":42},
+		"spriteSourceSize": {"x":3,"y":3,"w":48,"h":48},
+		"sourceSize": {"w":48,"h":48},
+		"anchor": {"x":0.5,"y":0.5}
 	},
-	"setting.share.png": {
-		"frame": {"x":200, "y":456, "w":48, "h":48},
-		"spriteSourceSize": {"x":0,"y":0,"w":48,"h":48},
-		"sourceSize": {"w":48,"h":48}
+	"ui.setting.share.png": {
+		"frame": {"x":428, "y":402, "w":42, "h":46},
+		"spriteSourceSize": {"x":3,"y":1,"w":48,"h":48},
+		"sourceSize": {"w":48,"h":48},
+		"anchor": {"x":0.5,"y":0.5}
 	},
-	"setting.voice.off.png": {
-		"frame": {"x":0, "y":456, "w":48, "h":48},
-		"spriteSourceSize": {"x":0,"y":0,"w":48,"h":48},
-		"sourceSize": {"w":48,"h":48}
+	"ui.setting.voice.off.png": {
+		"frame": {"x":50, "y":462, "w":46, "h":43},
+		"spriteSourceSize": {"x":1,"y":2,"w":48,"h":48},
+		"sourceSize": {"w":48,"h":48},
+		"anchor": {"x":0.5,"y":0.5}
 	},
-	"setting.voice.png": {
-		"frame": {"x":250, "y":456, "w":48, "h":48},
-		"spriteSourceSize": {"x":0,"y":0,"w":48,"h":48},
-		"sourceSize": {"w":48,"h":48}
+	"ui.setting.voice.png": {
+		"frame": {"x":0, "y":462, "w":46, "h":34},
+		"spriteSourceSize": {"x":1,"y":7,"w":48,"h":48},
+		"sourceSize": {"w":48,"h":48},
+		"anchor": {"x":0.5,"y":0.5}
 	}
 
 },
 "meta": {
 	"image": "ui.png",
-	"size": {"w": 492, "h": 506},
+	"size": {"w": 487, "h": 509},
 	"scale": "1"
 }
 }
