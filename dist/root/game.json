@@ -9,16 +9,5 @@
     "dataType": "String",
     "UDPReliabilityStrategy": 3,
     "heartBeatTick": 2000
-  },
-  "subpackages": [
-    {
-      "name": "colloc",
-      "root": "/colloc/"
-    },
-    {
-      "independent": true,
-      "name": "sudoku",
-      "root": "/sudoku/"
-    }
-  ]
+  }
 }

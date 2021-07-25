@@ -1,10 +1,11 @@
 import {stage, screen} from '~/core'
 import {store} from '~/util'
-import {Color} from '../module'
+import {Color, backBtn, monitor} from '../module'
 
 const width = 500
 const height = 500
 const r = 100
+const hitArea =  new PIXI.Circle(0, 0, 40)
 
 let scene: PIXI.Container
 
@@ -18,7 +19,6 @@ for (let i = 0; i < 25; i++) {
   const y = i / 5 | 0
 
   const txt = new PIXI.Text(`${i + 1}`, {
-    fontFamily: window.font,
     fontSize: 42,
     fill: Color.Blue
   })
@@ -33,24 +33,33 @@ for (let i = 0; i < 25; i++) {
   grid.addChild(txt)
 }
 
-function init(grade: Grade) {
+function init(grade: number) {
   scene = new PIXI.Container()
   stage.addChild(scene)
 
   grid.pivot.set(width / 2, height / 2)
   grid.position.set(screen.width / 2, screen.height / 2)
+  grid.interactive = true
+  grid.on('pointerdown', (e: IEvent) => {
+    const target = e.target
+    if (!(target instanceof PIXI.Text)) return
+    monitor.emit('scene:go', 'game', grade, +target.text)
+  })
 
   update(grade)
   scene.addChild(grid)
 }
 
-function update(grade: Grade = 1) {
+function update(grade: number) {
   for (let i = 0; i < 25; i++) {
     const j = i * grade
     const txt = grid.children[i] as PIXI.Text
     const ok = j <= store.colloc.level
+    txt.hitArea = hitArea
+    txt.style.fontFamily = window.font
     txt.text =  ok ? `${j + 1}` : ''
     if (ok) {
+      txt.interactive = true
       txt.text = `${j + 1}`
       txt.children[0].visible = false
     } else {
@@ -62,13 +71,14 @@ function update(grade: Grade = 1) {
   }
 }
 
-export function show(opts: {grade?: Grade} = {}) {
-  if (!scene) return init(opts.grade)
-  update(opts.grade)
+export function show(grade: number) {
+  if (!scene) init(grade)
+  else update(grade)
+  scene.visible = true
+  backBtn.show()
 }
 
 export function hide() {
-
+  scene.visible = false
+  backBtn.hide()
 }
-
-type Grade = 1 | 2 | 3

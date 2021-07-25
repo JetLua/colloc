@@ -13,7 +13,7 @@ function init() {
   menu.on('pointerdown', ({target}: IEvent) => {
     switch (target.name) {
       case 'blue': {
-        monitor.emit('scene:go', 'selector')
+        monitor.emit('scene:go', 'selector',  1)
         break
       }
     }

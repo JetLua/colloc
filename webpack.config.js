@@ -9,12 +9,12 @@ module.exports = ({prod} = {}) => {
       main: {
         import: [
           '@iro/wechat-adapter',
-          './src/fishpond/app.ts'
+          './src/colloc/app.ts'
         ],
         filename: 'game.js'
       },
-      colloc: {import: ['./src/colloc/app.ts'], filename: '[name]/game.js', dependOn: 'main'},
-      sudoku: {import: ['./src/sudoku/app.ts'], filename: '[name]/game.js', dependOn: 'main'},
+      // colloc: {import: ['./src/colloc/app.ts'], filename: '[name]/game.js', dependOn: 'main'},
+      // sudoku: {import: ['./src/sudoku/app.ts'], filename: '[name]/game.js', dependOn: 'main'},
     },
 
     experiments: {
