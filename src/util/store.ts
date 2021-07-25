@@ -12,7 +12,7 @@ let store = {
     }
   },
   colloc: {
-    level: 0,
+    level: 25,
     settings: {voice: 1, music: 1},
   }
 }

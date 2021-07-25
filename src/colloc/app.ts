@@ -18,7 +18,7 @@ monitor.once('wx:show', async () => {
     cursor.show(...args)
   })
 
-  monitor.emit('scene:go', 'game', 0, 0)
+  monitor.emit('scene:go', 'game', 2, 0)
 })
 
 wx.onShow(() => {
