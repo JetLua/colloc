@@ -8,9 +8,9 @@ let scene: PIXI.Container
 function init() {
   scene = new PIXI.Container()
   stage.addChild(scene)
-  menu.show({parent: scene})
-  menu.setPosition(screen.width / 2, screen.height / 2)
-  menu.on('pointerdown', ({target}: IEvent) => {
+  const _menu = menu.show()
+  _menu.position.set(screen.width / 2, screen.height / 2)
+  _menu.on('pointerdown', ({target}: IEvent) => {
     switch (target.name) {
       case 'blue': {
         monitor.emit('scene:go', 'selector',  1)
@@ -18,11 +18,13 @@ function init() {
       }
     }
   })
+  scene.addChild(_menu)
 }
 
 export function show() {
-  if (scene) return scene.visible = true
-  init()
+  if (!scene) init()
+  scene.visible = true
+  menu.update()
 }
 
 export function hide() {

@@ -1,12 +1,13 @@
 import {stage, screen} from '~/core'
 import {store} from '~/util'
-import {Color, backBtn, monitor} from '../module'
+import {Color, head, monitor} from '../module'
 
 const width = 500
 const height = 500
 const r = 100
 const hitArea =  new PIXI.Circle(0, 0, 40)
 
+let grade: number
 let scene: PIXI.Container
 
 const grid = new PIXI.Graphics()
@@ -33,7 +34,7 @@ for (let i = 0; i < 25; i++) {
   grid.addChild(txt)
 }
 
-function init(grade: number) {
+function init() {
   scene = new PIXI.Container()
   stage.addChild(scene)
 
@@ -43,14 +44,14 @@ function init(grade: number) {
   grid.on('pointerdown', (e: IEvent) => {
     const target = e.target
     if (!(target instanceof PIXI.Text)) return
-    monitor.emit('scene:go', 'game', grade, +target.text)
+    monitor.emit('scene:go', 'game', grade, +target.text - 1)
   })
 
-  update(grade)
+  update()
   scene.addChild(grid)
 }
 
-function update(grade: number) {
+function update() {
   for (let i = 0; i < 25; i++) {
     const j = i * grade
     const txt = grid.children[i] as PIXI.Text
@@ -71,14 +72,15 @@ function update(grade: number) {
   }
 }
 
-export function show(grade: number) {
-  if (!scene) init(grade)
-  else update(grade)
+export function show(_grade: number) {
+  grade = _grade
+  if (!scene) init()
+  else update()
   scene.visible = true
-  backBtn.show()
+  head.show({backBtn: true})
 }
 
 export function hide() {
   scene.visible = false
-  backBtn.hide()
+  head.hide()
 }

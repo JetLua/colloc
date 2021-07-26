@@ -31,11 +31,10 @@ function init() {
 }
 
 export function show(opts?: {parent: PIXI.Container}) {
-  !menu && init()
-  if (!opts) return menu.visible = true
+  if (!menu) init()
   update()
-  if (menu.parent) return
-  opts.parent.addChild(menu)
+  menu.visible = true
+  return menu
 }
 
 export function update() {
@@ -47,12 +46,4 @@ export function update() {
     item.interactive = active
     item.texture = PIXI.Texture.from(`ui.circle.${active ? colors[i] : 'lock'}.png`)
   })
-}
-
-export function setPosition(x: number, y?: number) {
-  menu.position.set(x, y)
-}
-
-export function on(name: string, cb: (e: IEvent) => void) {
-  menu.on(name, cb)
 }

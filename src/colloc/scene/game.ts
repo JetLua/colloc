@@ -2,7 +2,7 @@ import levels from '../level'
 import {stage, screen, ticker, tick} from '~/core'
 import {align} from '~/util'
 import {animate, linear} from 'popmotion'
-import {monitor} from '../module'
+import {head, monitor} from '../module'
 
 const width = 1440
 const height = 2560
@@ -17,7 +17,7 @@ const singleIds = [
 
 
 
-let speed = 18
+let speed = 14
 let started = false
 let baffles: IBaffle[] = []
 
@@ -62,7 +62,13 @@ function init() {
 
   ball = PIXI.Sprite.from('item.ball.png')
   ball.visible = false
+  ball.zIndex = 2
   area.addChild(ball)
+
+  monitor.on('game:retry', () => {
+    ticker.remove(update)
+    reset()
+  })
 
   scene.addChild(area)
 }
@@ -113,7 +119,11 @@ function layout(data: typeof levels[number][number]) {
       })
     }
 
-    item.angle != null && (baffle.angle = item.angle)
+    if (item.angle != null) {
+      baffle.angle =
+      baffle.defaultAngle = item.angle
+    }
+
     baffle.position.copyFrom(item)
     baffle.collidable = true
     baffle.name = item.frame
@@ -134,6 +144,10 @@ function start() {
   ball.position.copyFrom(startBtn.position)
   ball.visible = true
   ball.scale.set(1)
+
+  for (const baffle of baffles) {
+    baffle.interactive = false
+  }
 
   ticker.add(update)
 }
@@ -166,6 +180,20 @@ function update() {
 
 }
 
+function reset() {
+  started = false
+
+  ball.visible = false
+
+  for (const baffle of baffles) {
+    baffle.visible = true
+    baffle.collidable = true
+    baffle.defaultAngle != null && (baffle.angle = baffle.defaultAngle)
+    baffle.interactive = clickableIds.includes(baffle.name)
+    baffle instanceof PIXI.AnimatedSprite && baffle.gotoAndStop(0)
+  }
+}
+
 function respond(ball: PIXI.Sprite, baffle: IBaffle) {
   baffle instanceof PIXI.AnimatedSprite && baffle.gotoAndPlay(0)
 
@@ -188,7 +216,7 @@ function respond(ball: PIXI.Sprite, baffle: IBaffle) {
     }
   } else if (baffle.name === 'ring.png') {
     const next = baffles.find(item => item.name === 'ring.png' && item !== baffle)
-    next.collidable = false
+    next.responding = true
     ball.position.copyFrom(next)
   } else if (baffle.name === 'triangle.png') {
     const p = normalize(baffle.angle)
@@ -244,17 +272,21 @@ function next() {
     return
   }
 
-  for (const baffle of baffles) baffle.destroy({children: true})
-
-  baffles = []
+  clear()
 
   layout(levels[grade][level])
 
   started = false
 }
 
+function clear() {
+  for (const baffle of baffles) baffle.destroy({children: true})
+  baffles = []
+}
+
 function fail() {
   ticker.remove(update)
+  reset()
 }
 
 function win() {
@@ -278,6 +310,7 @@ function trail() {
 
   const shadow = pool.pop() || PIXI.Sprite.from('item.trail.png')
   shadow.alpha = 1
+  shadow.zIndex = 1
   shadow.position.copyFrom(last)
   ball.parent.addChild(shadow)
 
@@ -308,20 +341,21 @@ export function show(_grade: number, _level: number) {
   grade = _grade
   level = _level
 
-  if (!scene) init()
+  !scene && init()
+  scene.visible = true
   const data = levels[grade][level]
   layout(data)
+  head.show({backBtn: true, retryBtn: true})
 }
 
 export function hide() {
-
-}
-
-interface Options {
-  level: number
+  scene.visible = false
+  clear()
+  head.hide()
 }
 
 interface IBaffle extends PIXI.Sprite, PIXI.AnimatedSprite {
   collidable?: boolean
   responding?: boolean
+  defaultAngle?: number
 }
