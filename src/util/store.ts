@@ -1,7 +1,6 @@
 import merge from 'deepmerge'
 
 let store = {
-  files: {} as {[k: string]: string},
   fishpond: {
     settings: {voice: 1, widget: 1},
     data: {
@@ -13,6 +12,7 @@ let store = {
   },
   colloc: {
     level: 25,
+    files: {} as {[k: string]: string},
     settings: {voice: 1, music: 1},
   }
 }

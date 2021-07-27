@@ -6,18 +6,17 @@ const prefix = 'sound'
 export function play(id: string, opts: {volume?: number, loop?: boolean, reset?: boolean} = {}) {
   if (cache[id]) {
     const sound = cache[id]
-    sound.volume = opts.volume
+    sound.volume = opts.volume ?? 1
+    opts.reset ??= true
     opts.reset && sound.seek(0)
     sound.paused && sound.play()
     return sound
   } else {
     const sound = cache[id] = wx.createInnerAudioContext()
     sound.volume = opts.volume ?? 1
-    getSrc(id).then(src => {
-      sound.src = src
-      sound.loop = opts.loop
-      sound.autoplay = true
-    })
+    sound.src = `${fs.root}/${prefix}/${id}`
+    sound.loop = opts.loop
+    sound.autoplay = true
     return sound
   }
 }

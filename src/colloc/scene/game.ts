@@ -3,6 +3,7 @@ import {stage, screen, ticker, tick} from '~/core'
 import {align, store} from '~/util'
 import {animate, linear} from 'popmotion'
 import {head, monitor} from '../module'
+import {sound} from '~/module'
 
 const width = 1440
 const height = 2560
@@ -240,18 +241,22 @@ function respond(ball: PIXI.Sprite, baffle: IBaffle) {
       to: baffle.angle + 90,
       onUpdate: v => baffle.destroyed ? action.stop() : baffle.angle = v
     })
+    store.colloc.settings.voice && sound.play('collide.gear.mp3')
   } else if (baffle.name === 'ring.png') {
-
+    store.colloc.settings.voice && sound.play('transfer.mp3')
   } else if (baffle.name === 'green.png') {
-
+    store.colloc.settings.voice && sound.play('collide.green.png')
   } else if (baffle.name === 'pink.png' || baffle.name === 'square.once.png') {
     baffle.collidable = false
     baffle.onComplete = () => baffle.visible = false
+    store.colloc.settings.voice && sound.play('collide.once.mp3')
   } else if (baffle.name.startsWith('arrow')) {
     const tx = baffle.name === 'arrow.left.png' ? -200 :
       baffle.name === 'arrow.right.png' ? 200 : 0
     const ty = baffle.name === 'arrow.up.png' ? -200 :
       baffle.name === 'arrow.down.png' ? 200 : 0
+
+    store.colloc.settings.voice && sound.play('collide.arrow.mp3')
 
     const action = animate({
       from: {x: baffle.x, y: baffle.y},
@@ -259,6 +264,8 @@ function respond(ball: PIXI.Sprite, baffle: IBaffle) {
       duration: 3e2,
       onUpdate: v => baffle.destroyed ? action.stop() : baffle.position.copyFrom(v)
     })
+  } else {
+    store.colloc.settings.voice && sound.play('collide.mp3')
   }
 }
 
@@ -293,11 +300,14 @@ function clear() {
 }
 
 function fail() {
+  store.colloc.settings.voice && sound.play('fail.mp3')
   ticker.remove(update)
   reset()
 }
 
 function win() {
+  store.colloc.settings.voice && sound.play('win.mp3')
+
   ticker.remove(update)
 
   ball.position.copyFrom(endBtn)

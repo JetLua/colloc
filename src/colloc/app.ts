@@ -2,7 +2,9 @@ import {monitor} from './module'
 import {preload, game, entry, selector} from './scene'
 
 monitor.once('wx:show', async () => {
+  wx.showLoading({title: '正在加载...'})
   await preload()
+  wx.hideLoading()
 
   const stack: {cursor: IScene, args: any[]}[] = []
 
