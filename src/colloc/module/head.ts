@@ -57,8 +57,6 @@ function init() {
 
   const {top, height, right} = wx.getMenuButtonBoundingClientRect()
 
-  console.log(top, height, right)
-
   scene.position.set(
     (screen.width - right * pixelRatio) + scene.width / 2,
     (top + height / 2) * pixelRatio

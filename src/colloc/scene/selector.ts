@@ -44,7 +44,7 @@ function init() {
   grid.on('pointerdown', (e: IEvent) => {
     const target = e.target
     if (!(target instanceof PIXI.Text)) return
-    monitor.emit('scene:go', 'game', grade, +target.text - 1)
+    monitor.emit('scene:go', 'game', grade, (+target.text - 1) % 25)
   })
 
   update()
@@ -52,12 +52,14 @@ function init() {
 }
 
 function update() {
+  const colors = [Color.Blue, Color.Pink, Color.Yellow]
   for (let i = 0; i < 25; i++) {
-    const j = i * grade
+    const j = i + grade * 25
     const txt = grid.children[i] as PIXI.Text
     const ok = j <= store.colloc.level
     txt.hitArea = hitArea
     txt.style.fontFamily = window.font
+    txt.style.fill = colors[grade]
     txt.text =  ok ? `${j + 1}` : ''
     if (ok) {
       txt.interactive = true
@@ -67,7 +69,7 @@ function update() {
       txt.text = ''
       const dot = txt.children[0] as PIXI.Sprite
       dot.visible = true
-      dot.texture = PIXI.Texture.from(`ui.dot.${['blue', 'pink', 'yellow'][grade - 1]}.png`)
+      dot.texture = PIXI.Texture.from(`ui.dot.${['blue', 'pink', 'yellow'][grade]}.png`)
     }
   }
 }

@@ -39,7 +39,7 @@ export function show(opts?: {parent: PIXI.Container}) {
 
 export function update() {
   const {colloc: {level}} = store
-  const j = level % 25
+  const j = level / 25 | 0
   items.forEach((item, i) => {
     if (i > 2) return
     const active = i <= j

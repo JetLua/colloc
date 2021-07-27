@@ -13,7 +13,17 @@ function init() {
   _menu.on('pointerdown', ({target}: IEvent) => {
     switch (target.name) {
       case 'blue': {
+        monitor.emit('scene:go', 'selector',  0)
+        break
+      }
+
+      case 'pink': {
         monitor.emit('scene:go', 'selector',  1)
+        break
+      }
+
+      case 'yellow': {
+        monitor.emit('scene:go', 'selector',  2)
         break
       }
     }

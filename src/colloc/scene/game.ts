@@ -1,6 +1,6 @@
 import levels from '../level'
 import {stage, screen, ticker, tick} from '~/core'
-import {align} from '~/util'
+import {align, store} from '~/util'
 import {animate, linear} from 'popmotion'
 import {head, monitor} from '../module'
 
@@ -129,6 +129,7 @@ function layout(data: typeof levels[number][number]) {
     baffle.name = item.frame
     baffles.push(baffle)
     area.addChild(baffle)
+
   }
 
   align({target: area})
@@ -155,6 +156,7 @@ function start() {
 function update() {
   ball.x += Math.cos(ball.rotation) * speed
   ball.y += Math.sin(ball.rotation) * speed
+
   trail()
 
   // win
@@ -195,6 +197,8 @@ function reset() {
 }
 
 function respond(ball: PIXI.Sprite, baffle: IBaffle) {
+  ball.position.copyFrom(baffle)
+
   baffle instanceof PIXI.AnimatedSprite && baffle.gotoAndPlay(0)
 
   if (baffle.name === 'gear.png' || baffle.name === 'pink.png' || baffle.name === 'blue.png') {
@@ -266,11 +270,15 @@ function next() {
     grade++
   }
 
+  store.colloc.level = grade * 25 + level
+
   if (grade > 2) {
     wx.showToast({title: '恭喜你，通关啦', icon: 'none'})
     monitor.emit('entry')
+    store.colloc.level = 75
     return
   }
+
 
   clear()
 
