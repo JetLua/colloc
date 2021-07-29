@@ -21,7 +21,7 @@ export default async function() {
   const files = [
     {name: 'sound/bgm.mp3', v: '1.0.0'},
     {name: 'sound/win.mp3', v: '1.0.0'},
-    {name: 'sound/tap.mp3', v: '1.0.1'},
+    {name: 'sound/tap.mp3', v: '1.0.2'},
     {name: 'sound/fail.mp3', v: '1.0.0'},
     {name: 'sound/collide.mp3', v: '1.0.0'},
     {name: 'sound/transfer.mp3', v: '1.0.0'},
