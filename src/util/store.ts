@@ -1,4 +1,5 @@
 import merge from 'deepmerge'
+import {monitor} from '~/core'
 
 let store = {
   fishpond: {
@@ -13,7 +14,7 @@ let store = {
   colloc: {
     level: 25,
     files: {} as {[k: string]: string},
-    settings: {voice: 1, music: 1},
+    settings: {voice: 1, music: 0},
   }
 }
 
@@ -36,6 +37,7 @@ const handle = {
 
   set(target: any, k: any, v: any) {
     if (target[k] === v) return true
+
     if (v && typeof v === 'object' && !queue.has(v)) {
       v = new Proxy(v, handle)
       queue.add(v)
@@ -43,6 +45,7 @@ const handle = {
 
     target[k] = v
     localStorage.setItem('store', JSON.stringify(store))
+    monitor.emit('store')
     return true
   }
 }

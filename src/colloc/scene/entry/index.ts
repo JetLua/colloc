@@ -1,7 +1,6 @@
 import {stage, screen} from '~/core'
-import {store} from '~/util'
-
-import {menu, monitor} from '../module'
+import {monitor} from '../../module'
+import * as menu from './menu'
 
 let scene: PIXI.Container
 
@@ -10,7 +9,7 @@ function init() {
   stage.addChild(scene)
   const _menu = menu.show()
   _menu.position.set(screen.width / 2, screen.height / 2)
-  _menu.on('pointerdown', ({target}: IEvent) => {
+  _menu.on('pointerup', ({target}: IEvent) => {
     switch (target.name) {
       case 'blue': {
         monitor.emit('scene:go', 'selector',  0)
@@ -24,6 +23,11 @@ function init() {
 
       case 'yellow': {
         monitor.emit('scene:go', 'selector',  2)
+        break
+      }
+
+      case 'setting': {
+        monitor.emit('scene:go', 'setting')
         break
       }
     }

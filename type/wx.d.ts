@@ -42,6 +42,41 @@ declare module wx {
     bottom: number
   }
 
+  interface IVideo {
+
+  }
+
+  function createVideo(opts: {
+    x?: number
+    y?: number
+    width?: number
+    height?: number
+    src: string
+    poster?: string
+    initialTime?: number
+    playbackRate?: number
+    live?: boolean
+    objectFit?: 'fill' | 'contain' | 'cover'
+    controls?: boolean
+    showProgress?: boolean
+    showProgressInControlMode?: boolean
+    backgroundColor?: string
+    autoplay?: boolean
+    loop?: boolean
+    muted?: boolean
+    obeyMuteSwitch?: boolean
+    enableProgressGesture?: boolean
+    enablePlayGesture?: boolean
+    showCenterPlayBtn?: boolean
+    underGameView?: boolean
+  }): IVideo
+
+  function previewImage(opts: Callback<{
+    urls: string[],
+    showmenu?: boolean
+    current?: string
+  }>): void
+
   function getMenuButtonBoundingClientRect(): IRect
 
   interface IInnerAudioContext {

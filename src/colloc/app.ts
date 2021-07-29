@@ -1,7 +1,10 @@
+import {store} from '~/util'
+import {sound} from '~/module'
 import {monitor} from './module'
-import {preload, game, entry, selector} from './scene'
+import {monitor as globalMonitor} from '~/core'
+import {preload, game, entry, selector, setting} from './scene'
 
-monitor.once('wx:show', async () => {
+globalMonitor.once('wx:show', async () => {
   wx.showLoading({title: '正在加载...'})
   await preload()
   wx.hideLoading()
@@ -9,7 +12,7 @@ monitor.once('wx:show', async () => {
   const stack: {cursor: IScene, args: any[]}[] = []
 
   monitor.on('scene:go', (name: string, ...args: any[]) => {
-    const cursor: IScene = {game, entry, selector}[name]
+    const cursor: IScene = {game, entry, selector, setting}[name]
     stack[stack.length - 1]?.cursor.hide()
     cursor.show(...args)
     stack.push({cursor, args})
@@ -20,9 +23,13 @@ monitor.once('wx:show', async () => {
     cursor.show(...args)
   })
 
-  monitor.emit('scene:go', 'game', 2, 0)
-})
+  monitor.emit('scene:go', 'setting', 2, 0)
 
-wx.onShow(() => {
-  monitor.emit('wx:show')
+}).on('wx:show', () => {
+  store.colloc.settings.music &&
+  sound.play('bgm.mp3', {loop: true, reset: false})
+}).on('store', () => {
+  store.colloc.settings.music ?
+    sound.play('bgm.mp3', {loop: true, reset: false}) :
+    sound.pause('bgm.mp3')
 })

@@ -50,7 +50,6 @@ function init() {
 
 function update() {
   const colors = [Color.Blue, Color.Pink, Color.Yellow]
-  console.log(window.font)
   for (let i = 0; i < 25; i++) {
     const j = i + grade * 25
     const txt = scene.children[i] as PIXI.Text

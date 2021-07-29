@@ -19,8 +19,9 @@ export default async function() {
 
     // 加载网络资源并存入本地
   const files = [
+    {name: 'sound/bgm.mp3', v: '1.0.0'},
     {name: 'sound/win.mp3', v: '1.0.0'},
-    {name: 'sound/tap.mp3', v: '1.0.0'},
+    {name: 'sound/tap.mp3', v: '1.0.1'},
     {name: 'sound/fail.mp3', v: '1.0.0'},
     {name: 'sound/collide.mp3', v: '1.0.0'},
     {name: 'sound/transfer.mp3', v: '1.0.0'},
@@ -28,7 +29,7 @@ export default async function() {
     {name: 'sound/collide.gear.mp3', v: '1.0.0'},
     {name: 'sound/collide.green.mp3', v: '1.0.0'},
     {name: 'sound/collide.arrow.mp3', v: '1.0.0'},
-    {name: 'font/Raleway-SemiBold.ttf', v: '1.0.0'}
+    {name: 'font/RalewaySemiBold.ttf', v: '1.0.1'}
   ]
 
   for (const item of files) {
@@ -44,7 +45,7 @@ export default async function() {
     }
   }
 
-  window.font = wx.loadFont(`${fs.root}/font/Raleway-SemiBold.ttf`)
+  window.font = wx.loadFont(`${fs.root}/font/RalewaySemiBold.ttf`)
 
   return promise
 }

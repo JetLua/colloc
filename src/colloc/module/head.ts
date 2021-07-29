@@ -2,6 +2,7 @@ import monitor from './monitor'
 import {stage, screen, pixelRatio} from '~/core'
 import {Design} from './enum'
 import {animate} from 'popmotion'
+import Button from './Button'
 
 const width = 56
 const gap = 30
@@ -18,7 +19,7 @@ function init() {
   scene.interactive = true
   scene.pivot.set(scene.width / 2, scene.height / 2)
   scene.scale.set(Design.Scale)
-  scene.on('pointerdown', (e: IEvent) => {
+  scene.on('pointerup', (e: IEvent) => {
     const target = e.target
     switch (target.name) {
       case 'btn:back': {
@@ -41,14 +42,14 @@ function init() {
     }
   })
 
-  backBtn = PIXI.Sprite.from('ui.icon.back.png')
+  backBtn = new Button({id: 'ui.icon.back.png', zoom: [1, 1.2]})
   backBtn.interactive = true
   backBtn.name = 'btn:back'
   backBtn.tint = 0x8799a3
   backBtn.position.set(width / 2)
   scene.addChild(backBtn)
 
-  retryBtn = PIXI.Sprite.from('ui.icon.retry.png')
+  retryBtn = new Button({id: 'ui.icon.retry.png', zoom: [1, 1.2]})
   retryBtn.interactive = true
   retryBtn.name = 'btn:retry'
   retryBtn.tint = 0x8799a3

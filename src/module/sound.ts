@@ -21,6 +21,12 @@ export function play(id: string, opts: {volume?: number, loop?: boolean, reset?:
   }
 }
 
+export function pause(id: string) {
+  const sound = cache[id]
+  if (!sound) return
+  !sound.paused && sound.pause()
+}
+
 function getSrc(id: string) {
   const path = `${prefix}/${id}`
   return fs.access(path).then(([result, err]) => {

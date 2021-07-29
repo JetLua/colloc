@@ -1,5 +1,5 @@
 import {store} from '~/util'
-import {Design} from './enum'
+import {Button, Design} from '~/colloc/module'
 
 const width = 150
 const height = 690
@@ -17,7 +17,6 @@ function init() {
   menu.interactive = true
   menu.pivot.set(width / 2, height / 2)
   menu.scale.set(Design.Scale)
-
 
   colors.forEach((id, i) => {
     const item = PIXI.Sprite.from(`ui.circle.${id}.png`)
