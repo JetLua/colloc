@@ -24,6 +24,10 @@ declare module wx {
     const USER_DATA_PATH: string
   }
 
+  function getChannelsLiveInfo(opts: Callback<{
+    finderUserName: string
+  }>)
+
   interface Touch {
     identifier: number
     pageX: number
