@@ -193,7 +193,9 @@ declare module wx {
     offSeeked(cb: () => {})
   }
 
-  function createInnerAudioContext(): IInnerAudioContext
+  function createInnerAudioContext(opts?: {
+    useWebAudioImplement?: boolean
+  }): IInnerAudioContext
 
   function loadSubpackage(opts: Callback<{
     name: string

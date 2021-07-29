@@ -245,7 +245,7 @@ function respond(ball: PIXI.Sprite, baffle: IBaffle) {
   } else if (baffle.name === 'ring.png') {
     store.colloc.settings.voice && sound.play('transfer.mp3')
   } else if (baffle.name === 'green.png') {
-    store.colloc.settings.voice && sound.play('collide.green.png')
+    store.colloc.settings.voice && sound.play('collide.green.mp3')
   } else if (baffle.name === 'pink.png' || baffle.name === 'square.once.png') {
     baffle.collidable = false
     baffle.onComplete = () => baffle.visible = false

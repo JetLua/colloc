@@ -12,7 +12,7 @@ export function play(id: string, opts: {volume?: number, loop?: boolean, reset?:
     sound.paused && sound.play()
     return sound
   } else {
-    const sound = cache[id] = wx.createInnerAudioContext()
+    const sound = cache[id] = wx.createInnerAudioContext({useWebAudioImplement: true})
     sound.volume = opts.volume ?? 1
     sound.src = `${fs.root}/${prefix}/${id}`
     sound.loop = opts.loop
