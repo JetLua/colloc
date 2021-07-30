@@ -39,7 +39,6 @@ function init() {
     fill: 0xb0c4ce,
     fontFamily: window.font,
     fontSize: 36 * Design.Scale | 0,
-    fontWeight: 'bold'
   })
   title.anchor.set(.5)
   scene.addChild(title)

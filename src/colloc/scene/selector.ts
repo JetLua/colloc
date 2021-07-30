@@ -33,6 +33,7 @@ function init() {
     const txt = new PIXI.Text(`${i + 1}`, {
       fontSize: 42,
       fill: Color.Blue,
+      fontFamily: window.font
     })
 
     const dot = PIXI.Sprite.from(PIXI.Texture.WHITE)
@@ -55,7 +56,6 @@ function update() {
     const txt = scene.children[i] as PIXI.Text
     const ok = j <= store.colloc.level
     txt.hitArea = hitArea
-    txt.style.fontFamily = window.font
     txt.style.fill = colors[grade]
     txt.text =  ok ? `${j + 1}` : ''
     if (ok) {

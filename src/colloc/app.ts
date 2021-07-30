@@ -23,7 +23,7 @@ globalMonitor.once('wx:show', async () => {
     cursor.show(...args)
   })
 
-  monitor.emit('scene:go', 'game', 2, 0)
+  monitor.emit('scene:go', 'entry', 2, 0)
 
 }).on('wx:show', () => {
   store.colloc.settings.music &&
