@@ -8,8 +8,10 @@ export function play(id: string, opts: {volume?: number, loop?: boolean, reset?:
     const sound = cache[id]
     sound.volume = opts.volume ?? 1
     opts.reset ??= true
-    opts.reset && sound.seek(0)
-    sound.paused && sound.play()
+    // opts.reset && sound.seek(0)
+    // android seek 有问题
+    opts.reset && sound.stop()
+    sound.play()
     return sound
   } else {
     const sound = cache[id] = wx.createInnerAudioContext({useWebAudioImplement: true})

@@ -23,11 +23,14 @@ globalMonitor.once('wx:show', async () => {
     cursor.show(...args)
   })
 
-  monitor.emit('scene:go', 'setting', 2, 0)
+  monitor.emit('scene:go', 'game', 2, 0)
 
 }).on('wx:show', () => {
   store.colloc.settings.music &&
   sound.play('bgm.mp3', {loop: true, reset: false})
+  window.interaction = new Promise(resolve => {
+    resolve(wx.getMenuButtonBoundingClientRect())
+  })
 }).on('store', () => {
   store.colloc.settings.music ?
     sound.play('bgm.mp3', {loop: true, reset: false}) :

@@ -1,8 +1,8 @@
 import levels from '../level'
-import {stage, screen, ticker, tick} from '~/core'
+import {stage, screen, ticker, pixelRatio} from '~/core'
 import {align, store} from '~/util'
 import {animate, linear} from 'popmotion'
-import {head, monitor} from '../module'
+import {Color, head, monitor} from '../module'
 import {sound} from '~/module'
 
 const width = 1440
@@ -17,13 +17,13 @@ const singleIds = [
 ]
 
 
-
 let speed = 14
 let started = false
 let baffles: IBaffle[] = []
 
 let grade: number
 let level: number
+let title: PIXI.Text
 let last: PIXI.Point
 let ball: PIXI.Sprite
 let endBtn: PIXI.Sprite
@@ -34,6 +34,22 @@ let startBtn: PIXI.AnimatedSprite
 function init() {
   scene = new PIXI.Container()
   stage.addChild(scene)
+
+  title = new PIXI.Text('', {
+    fill: 0xffffff,
+    fontFamily: window.font,
+    fontSize: 40,
+    fontWeight: 'bold'
+  })
+  title.anchor.set(.5)
+  scene.addChild(title)
+
+  window.interaction.then(({top, height}) => {
+    title.position.set(
+      screen.width / 2,
+      (top + height / 2) * pixelRatio
+    )
+  })
 
   area = new PIXI.Container
   area.scale.set(Math.min(screen.width / width, screen.height / height))
@@ -280,6 +296,7 @@ function next() {
   store.colloc.level = grade * 25 + level
 
   if (grade > 2) {
+    // todo: 展示dialog
     wx.showToast({title: '恭喜你，通关啦', icon: 'none'})
     monitor.emit('entry')
     store.colloc.level = 75
@@ -288,6 +305,8 @@ function next() {
 
 
   clear()
+
+  title.text = `No.${grade * 25 + level + 1}`
 
   layout(levels[grade][level])
 
@@ -363,6 +382,7 @@ export function show(_grade: number, _level: number) {
   scene.visible = true
   const data = levels[grade][level]
   layout(data)
+  title.text = `No.${grade * 25 + level + 1}`
   head.show({backBtn: true, retryBtn: true})
 }
 

@@ -56,12 +56,12 @@ function init() {
   retryBtn.position.set(width * 1.5 + gap, width / 2)
   scene.addChild(retryBtn)
 
-  const {top, height, right} = wx.getMenuButtonBoundingClientRect()
-
-  scene.position.set(
-    (screen.width - right * pixelRatio) + scene.width / 2,
-    (top + height / 2) * pixelRatio
-  )
+  window.interaction.then(({top, height, right}) => {
+    scene.position.set(
+      (screen.width - right * pixelRatio) + scene.width / 2,
+      (top + height / 2) * pixelRatio
+    )
+  })
 
   stage.addChild(scene)
 }

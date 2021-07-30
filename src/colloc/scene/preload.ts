@@ -45,7 +45,7 @@ export default async function() {
     }
   }
 
-  window.font = wx.loadFont(`${fs.root}/font/RalewaySemiBold.ttf`)
+  window.font = wx.loadFont(`${fs.root}/font/RalewaySemiBold.ttf`) ?? ''
 
   return promise
 }
