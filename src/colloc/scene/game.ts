@@ -2,7 +2,7 @@ import levels from '../level'
 import {stage, screen, ticker, pixelRatio} from '~/core'
 import {align, store} from '~/util'
 import {animate, linear} from 'popmotion'
-import {Color, head, monitor} from '../module'
+import {Color, Design, head, monitor} from '../module'
 import {sound} from '~/module'
 
 const width = 1440
@@ -36,9 +36,9 @@ function init() {
   stage.addChild(scene)
 
   title = new PIXI.Text('', {
-    fill: 0xffffff,
+    fill: 0xb0c4ce,
     fontFamily: window.font,
-    fontSize: 40,
+    fontSize: 36 * Design.Scale | 0,
     fontWeight: 'bold'
   })
   title.anchor.set(.5)
